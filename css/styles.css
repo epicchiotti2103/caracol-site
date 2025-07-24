@@ -435,7 +435,7 @@ section {
     content: "";
     position: absolute;
     inset: 0;
-    content: none
+
     z-index: 2;
     pointer-events: none;
 }
