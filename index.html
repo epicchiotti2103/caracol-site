@@ -48,15 +48,9 @@
                     Escalamos negócios com tecnologia proprietária e expertise em toda América Latina.
                 </p>
                 <div class="social-proof">
-                    <div class="proof-item">
-                        <i class="fas fa-handshake"></i>
-                        <span>Parceiros de fintechs líderes</span>
-                    </div>
-                    <div class="proof-item">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Eficiência comprovada em diversos mercados</span>
-                    </div>
-                </div>
+    <div class="proof-item">- Parceiros de fintechs líderes</div>
+    <div class="proof-item">- Eficiência comprovada em diversos mercados</div>
+</div>
                 <div class="hero-ctas">
                     <a href="#cases" class="btn btn-primary">
                         <i class="fas fa-chart-bar"></i>
@@ -310,10 +304,10 @@
                 <div class="latam-text">
                     <h2>América Latina é Nosso Território</h2>
                     <h3>"Onde outros veem barreiras, vemos oportunidades"</h3>
-                    <p>
-                        Nossa expertise em canais não convencionais se estende por toda América Latina. Conhecemos os nuances de cada mercado, as regulamentações locais e os inventários premium que não estão disponíveis para agências tradicionais.
-                    </p>
-                    <p>
+                    <p class="latam-expertise">
+    Nossa expertise em canais não convencionais se estende por toda América Latina. Conhecemos os nuances de cada mercado, as regulamentações locais e os inventários premium que não estão disponíveis para agências tradicionais.
+</p>
+                    <p class="latam-expertise">
                         Enquanto a concorrência fica limitada ao Brasil, nós já dominamos:
                     </p>
                     <ul class="latam-features">
@@ -329,20 +323,7 @@
                 </div>
                 <div class="latam-visual">
                     <img src="images/latin_america.jpg" alt="América Latina">
-                    <div class="latam-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">15+</span>
-                            <span class="stat-label">Países</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Canais</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">100+</span>
-                            <span class="stat-label">Campanhas</span>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -594,5 +575,25 @@
     </footer>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
+<script>
+function randomFloat(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function animateCard(card) {
+  const x = randomFloat(-30, 30); // pixels para esquerda/direita
+  const y = randomFloat(-30, 30); // pixels para cima/baixo
+  card.style.transition = "transform 1.5s cubic-bezier(.4,2,.6,1)";
+  card.style.transform = `translate(${x}px, ${y}px)`;
+  setTimeout(() => animateCard(card), randomFloat(1200, 2200)); // tempo aleatório
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const card1 = document.querySelector('.card-1');
+  const card2 = document.querySelector('.card-2');
+  if (card1) animateCard(card1);
+  if (card2) animateCard(card2);
+});
+</script>
 </body>
 </html>
