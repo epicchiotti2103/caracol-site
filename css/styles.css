@@ -345,7 +345,7 @@ section {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.12); /* ajuste a opacidade conforme desejar */
+    background: rgba(0,0,0,0.42); /* ajuste a opacidade conforme desejar */
     pointer-events: none;
     z-index: 2;
 }
@@ -1192,3 +1192,11 @@ section {
     100% { transform: translateY(10px); }
 }
 
+.service-title {
+    color: var(--accent-yellow);      /* amarelo da sua marca */
+    font-size: 2.0rem;                /* maior */
+    font-weight: 800;
+    text-align: center;               /* centralizado */
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.5px;
+}
