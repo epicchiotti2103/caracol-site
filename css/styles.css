@@ -172,21 +172,11 @@ body {
 }
 .social-proof {
     display: flex;
-    gap: 2rem;
-    margin-bottom: 3rem;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
 }
-
-.proof-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--secondary-lime);
-}
-
-.proof-item i {
-    color: var(--accent-yellow);
-}
-
 .hero-ctas {
     display: flex;
     gap: 1rem;
@@ -347,19 +337,31 @@ section {
 
 .service-image {
     position: relative;
-    height: 250px;
+    height: 300px;
     overflow: hidden;
+}
+
+.service-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.12); /* ajuste a opacidade conforme desejar */
+    pointer-events: none;
+    z-index: 2;
 }
 
 .service-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    object-fit: cover ;
+    transition: transform 0.7s ease;
+    object-position: top center ;
+    transform: scale(1);
+    /* filter: blur(0.10px); /* aplica o blur */
 }
 
 .service-card:hover .service-image img {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .service-overlay {
@@ -369,6 +371,7 @@ section {
     right: 0;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     padding: 2rem;
+    padding-top: 1.0rem;
 }
 
 .service-overlay h3 {
@@ -417,7 +420,29 @@ section {
 
 /* Diferenciais */
 .diferenciais {
-    background: var(--base-black);
+    position: relative;
+    background: #1D5913; /* fundo verde desejado */
+    background-image:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url('../images/mapa_mundi.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    z-index: 10;
+}
+
+.diferenciais::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    content: none
+    z-index: 2;
+    pointer-events: none;
+}
+
+.diferenciais > * {
+    position: relative;
+    z-index: 3;
 }
 
 .diferenciais-grid {
@@ -568,9 +593,37 @@ section {
     text-align: center;
 }
 
-/* América Latina */
 .latam {
-    background: var(--base-black);
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255, 139, 0, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(183, 225, 1, 0.08) 0%, transparent 50%),
+        url('../images/bg-folhas-colorido.jpg') center center/cover no-repeat;
+    position: relative;
+    z-index: 1;
+    /* Adicione esta linha para inverter o fundo */
+    /* Crie um pseudo-elemento para inverter a imagem */
+    overflow: hidden;
+}
+
+.latam::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), /* overlay escuro */
+        radial-gradient(circle at 30% 20%, rgba(255, 139, 0, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(183, 225, 1, 0.08) 0%, transparent 50%),
+        url('../images/bg-folhas-colorido.jpg') center center/cover no-repeat;
+    transform: scaleY(-1);
+    z-index: 1;
+    pointer-events: none;
+}
+.latam > * {
+    position: relative;
+    z-index: 2;
+}
+.latam::before {
+    content: none;
 }
 
 .latam-content {
@@ -1100,17 +1153,25 @@ section {
 }
 
 .proof-item {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    color: #fff;
+    font-size: 1.1rem;
+    display: block;
+    font-weight: 200;
+    min-width: 0;
+    max-width: none;
+    line-height: 1.7;
+    box-sizing: border-box;
 }
 
 .proof-item i {
   color: var(--primary-orange);
+}
+
+.latam-text p.latam-expertise {
+    color: #fff !important;
+    font-weight: 800;
 }
