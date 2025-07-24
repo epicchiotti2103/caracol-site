@@ -118,6 +118,8 @@ body {
         radial-gradient(circle at 70% 80%, rgba(183, 225, 1, 0.1) 0%, transparent 50%),
         url('../images/bg-folhas-escuro.jpg') center center/cover no-repeat;
     position: relative;
+    padding-top: 120px; /* ajuste conforme necessário */
+
 }
 
 .hero-background {
@@ -251,7 +253,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    animation: float 6s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite;
 }
 
 .card-floating i {
@@ -284,7 +286,7 @@ body {
 
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    50% { transform: translateY(-40px); }
 }
 
 
