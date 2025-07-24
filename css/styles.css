@@ -427,7 +427,7 @@ section {
         url('../images/mapa_mundi.png');
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: contain;
+    background-size: cover;
     z-index: 10;
 }
 
@@ -605,7 +605,7 @@ section {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
         radial-gradient(circle at 30% 20%, rgba(255, 139, 0, 0.08) 0%, transparent 50%),
         radial-gradient(circle at 70% 80%, rgba(183, 225, 1, 0.08) 0%, transparent 50%),
         url('../images/bg-folhas-colorido.jpg') center center/cover no-repeat;
@@ -674,10 +674,9 @@ section {
     background: var(--medium-gray);
     padding: 1.5rem;
     border-radius: 10px;
-    border-left: 4px solid var(--primary-orange);
+    border-left: 4px solid #b7e101; /* verde limão */
     color: #ffffff;
 }
-
 .latam-visual {
     position: relative;
 }
@@ -1199,4 +1198,301 @@ section {
     text-align: center;               /* centralizado */
     margin-bottom: 0.7rem;
     letter-spacing: 0.5px;
+}
+
+.core-business {
+  padding: 5rem 2rem;
+  background: linear-gradient(to bottom, #000, #111);
+  text-align: center;
+  color: #fff;
+}
+
+.core-business h2 {
+  font-size: 2.5rem;
+  margin-bottom: 4rem;
+}
+
+.core-business .precisao {
+  color: #b7e101;
+  font-weight: bold;
+}
+
+.core-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.core-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 450px;
+  text-align: left;
+}
+
+.core-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  /* Remova o padding se quiser o ícone centralizado */
+  padding: 0;
+}
+
+.core-icon.orange {
+  background-color: #ff8b00;
+  color: #000;
+}
+
+.core-icon.yellow {
+  background-color: #b7e101;
+  color: #000;
+}
+
+.core-card h3 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.core-card p {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.core-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.core-card li {
+  margin-bottom: 0.6rem;
+  color: #cfcfcf;
+}
+
+.core-card li i {
+  color: #b7e101;
+  margin-right: 0.5rem;
+}
+.core-card:hover {
+  border-color: #ff8b00; /* padrão laranja */
+  transition: border-color 0.3s;
+}
+
+/* Se o primeiro card (Growth Marketing) */
+.core-boxes .core-card:nth-child(1):hover {
+  border-color: #ff8b00; /* laranja */
+  box-shadow: 0 0 0 3px rgba(255,139,0,0.15);
+}
+
+/* Se o segundo card (Job Advertising) */
+.core-boxes .core-card:nth-child(2):hover {
+  border-color: #b7e101; /* verde limão */
+  box-shadow: 0 0 0 3px rgba(183,225,1,0.15);
+}
+
+.core-badge {
+  display: inline-block;
+  background-color: #b7e101;
+  color: #000;
+  padding: 0.3rem 1rem;
+  font-weight: bold;
+  border-radius: 30px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center; /* Adicione esta linha */
+}
+.diferenciais .core-badge {
+  background-color: #ff8b00;
+  color: #000;
+}
+
+.core-badge i {
+  margin-right: 0.5rem;
+}
+.diferenciais {
+  text-align: center;
+}
+.diferenciais-grid {
+  text-align: left;
+}
+.diferenciais-frase {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 2rem;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+/* Cor amarela Caracol */
+.laranja {
+  color: #ff8b00 !important;
+}
+
+.amarelo {
+  color: #ffe01b;
+}
+
+
+.branco {
+  color: #ffffff;
+}
+
+.core-badge-yellow {
+  background-color: #ffe01b !important;
+  color: #000 !important;
+}
+
+.cases-frase {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem; /* diminua aqui */
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+.cases .subtitle {
+  display: block;
+  font-size: 1rem;
+  color:white;
+  margin-top: 0; /* diminua ou zere aqui */
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.cases .core-badge {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.cases {
+  text-align: center;
+}
+.cases-grid {
+  text-align: left;
+}
+
+.latam-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.latam-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.latam-title-white {
+    color: #fff;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: unset;
+}
+
+.latam-title-green {
+    color: #1D5913;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    -webkit-text-fill-color: unset;
+}
+
+.latam-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#latam .core-badge {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.latam-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.latam-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.12);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.core-badge.latam-badge {
+    background-color: #b7e101 !important; /* verde limão */
+    color: #000 !important;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+    padding: 0.3rem 1.2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.latam-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.latam-title-white {
+    color: #fff !important;
+}
+
+.latam-title-green {
+    color: #b7e101 !important;
+    font-weight: 800;
+}
+
+.latam-subtitle-white {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+}
+
+.latam-header .core-badge.latam-badge {
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    text-align: center;
+}
+
+.latam-expertise-cinza .latam-expertise {
+    color: #fff !important;
+    font-weight: 100;
 }
