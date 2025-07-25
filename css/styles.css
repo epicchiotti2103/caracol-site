@@ -864,6 +864,10 @@ section {
     text-decoration: none;
 }
 
+.contato-info {
+    margin-top: 5rem; /* ajuste o valor conforme desejar */
+}
+
 .info-item {
     display: flex;
     align-items: center;
@@ -873,7 +877,7 @@ section {
 }
 
 .info-item i {
-    color: var(--primary-orange);
+    color: var(--secondary-lime);
     width: 20px;
 }
 
@@ -881,11 +885,11 @@ section {
     background: var(--medium-gray);
     padding: 2.5rem;
     border-radius: 20px;
-    border: 1px solid rgba(255, 139, 0, 0.2);
+    border: 1px solid var(--secondary-lime); /* verde limão */
 }
 
 .contato-form h4 {
-    color: var(--accent-yellow);
+    color: var(--secondary-lime);
     font-size: 1.3rem;
     margin-bottom: 2rem;
     font-weight: 700;
@@ -908,7 +912,7 @@ section {
     width: 100%;
     padding: 1rem;
     background: var(--dark-gray);
-    border: 1px solid rgba(255, 139, 0, 0.3);
+    border: 1px solid var(--secondary-lime); /* verde limão */
     border-radius: 8px;
     color: #ffffff;
     font-family: 'Inter', sans-serif;
@@ -1587,4 +1591,183 @@ section {
 .case-impact span {
   font-size: 0.9rem;
   color: #ccc;
+}
+
+.footer {
+  background-color: #000;
+  color: #ccc;
+  padding: 3rem 2rem 2rem;
+  font-size: 0.95rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-col {
+  flex: 1 1 200px;
+}
+
+.brand-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ff8c00;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  color: #d4d83d;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.footer-col h4 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-col ul li a {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+  color: #d4d83d;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #333;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.form-wrapper {
+  background-color: #121212;
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid #d4d83d; /* Borda amarela neon suave */
+  color: #fff;
+}
+
+.form-wrapper h2 {
+  font-size: 1.5rem;
+  color: #ffd700; /* Amarelo forte */
+  margin-bottom: 2rem;
+}
+
+form label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+form input,
+form textarea {
+  background-color: #1b1b1b;
+  color: #fff;
+  border: 1px solid #ffae00;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  transition: border 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #d4d83d;
+  outline: none;
+}
+
+.contact-info {
+  color: #ccc;
+}
+
+.contact-info i {
+  color: #ff8c00;
+  margin-right: 0.5rem;
+}
+
+.language-switcher {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-left: 2.5rem; /* aumenta o espaço à esquerda */
+}
+
+.language-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.language-btn:hover {
+  opacity: 0.7;
+}
+
+.flag-icon {
+  width: 20px;
+  height: auto;
+  border-radius: 3px;
+}
+.contato-grid {
+  display: grid;
+  margin-top: 4.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+  .contato-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.btn-primary2 {
+    background: linear-gradient(90deg, var(--secondary-lime) 10%, var(--secondary-lime) 80%, #fff 100%);
+    color: #1a1a1a;
+    font-weight: 700;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid var(--secondary-lime); /* verde limão */
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-lime);
+    color: var(--base-black);
+    border-color: var(--secondary-lime);
+    transform: translateY(-2px);
 }
