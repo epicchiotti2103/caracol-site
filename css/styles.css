@@ -255,30 +255,45 @@ body {
     font-weight: 600;
     text-align: center;
 }
-
 .card-1 {
-    top: 20%;
+    top: 10%;
     left: 10%;
     animation-delay: 0s;
+    z-index: 3;
 }
 
 .card-2 {
-    top: 50%;
-    right: 20%;
-    animation-delay: 2s;
+    top: 10%;
+    right: 10%;
+    animation-delay: 0.7s;
+    z-index: 2;
 }
 
 .card-3 {
-    bottom: 20%;
-    left: 30%;
-    animation-delay: 4s;
+    bottom: 15%;
+    left: 25%;
+    animation-delay: 1.4s;
+    z-index: 1;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-40px); }
+
+
+@keyframes floatY {
+    0%, 100% { transform: translateY(0px);}
+    50% { transform: translateY(-40px);}
+}
+@keyframes floatX {
+    0%, 100% { transform: translateX(0px);}
+    50% { transform: translateX(40px);}
+}
+@keyframes floatXY {
+    0%, 100% { transform: translate(0px,0px);}
+    50% { transform: translate(30px,-30px);}
 }
 
+.card-1 { animation: floatY 4s ease-in-out infinite; }
+.card-2 { animation: floatX 4s ease-in-out infinite; }
+.card-3 { animation: floatXY 4s ease-in-out infinite; }
 
 
 /* Seções */
@@ -628,6 +643,8 @@ section {
     gap: 4rem;
     align-items: center;
 }
+
+
 
 .latam-text h2 {
     font-size: 2.5rem;
@@ -1045,8 +1062,9 @@ section {
     }
 
     .hero-visual {
-        height: 300px;
-    }
+    position: relative;
+    height: 600px; /* aumente para testar */
+}
 
     .services-grid {
         grid-template-columns: 1fr;
@@ -1258,6 +1276,11 @@ section {
 }
 
 .core-icon.yellow {
+  background-color: #ffe01b;
+  color: #000;
+}
+
+.core-icon.green {
   background-color: #b7e101;
   color: #000;
 }
@@ -1770,4 +1793,36 @@ form textarea:focus {
     color: var(--base-black);
     border-color: var(--secondary-lime);
     transform: translateY(-2px);
+}
+
+.core-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+}
+.core-card {
+  flex: 1 1 30%;
+  max-width: 32%;
+}
+.latam-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.latam-expertise-cinza {
+    max-width: 800px;         /* aumente para espalhar mais */
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;         /* deixe o texto alinhado à esquerda */
+    padding: 0 2rem;          /* adicione espaçamento lateral */
+}
+
+.latam-content > .latam-expertise-cinza {
+    justify-self: center;
+}
+.latam-expertise-cinza {
+    text-align: center;
 }
