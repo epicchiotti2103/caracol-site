@@ -132,6 +132,15 @@ body {
                 radial-gradient(circle at 70% 80%, rgba(183, 225, 1, 0.1) 0%, transparent 50%);
 }
 
+.hero-background2 {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  background: url('../images/bg-folhas-escuro.jpg') center center/cover no-repeat;
+  opacity: 0.15; /* ajuste conforme necessário */
+  pointer-events: none;
+}
+
 .hero .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
