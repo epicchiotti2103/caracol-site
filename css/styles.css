@@ -60,7 +60,7 @@ body {
 
 .nav-menu {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .nav-link {
@@ -1834,4 +1834,64 @@ form textarea:focus {
 }
 .latam-expertise-cinza {
     text-align: center;
+}
+
+.language-selector {
+  position: relative;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.language-selector > a {
+  color: #fff; /* cor do texto no header */
+  text-decoration: none;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.language-selector .dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #111;
+  color: #ffff;
+  border-radius: 8px;
+  min-width: 180px;
+  top: 100%;
+  right: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 0.5rem 0;
+}
+
+.language-selector:hover .dropdown-menu {
+  display: block;
+}
+
+.language-selector .dropdown-menu li {
+  list-style: none;
+}
+
+.language-selector .dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.language-selector .dropdown-menu li a:hover {
+  background-color: #f0f0f0;
+  color: #111;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.language-selector {
+  margin-left: 2rem; /* espaço entre idiomas e links */
 }
