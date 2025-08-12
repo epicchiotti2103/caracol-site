@@ -23,12 +23,12 @@
   <!-- Idiomas alinhados -->
 <div class="nav-menu" id="nav-menu">
   <a href="#hero" class="nav-link">Início</a>
-  <a href="#services" class="nav-link">Serviços</a>
+  <a href="#core-business" class="nav-link">Serviços</a>
   <a href="#diferenciais" class="nav-link">Diferenciais</a>
   <a href="#cases" class="nav-link">Cases</a>
-  <a href="#latam" class="nav-link">América Latina</a>
+  <a href="../blog/pt/index.html" class="nav-link">Conteúdo</a>
   <a href="#contato" class="nav-link">Contato</a>
-  <a href="publisher/html_2.html" class="nav-link" target="_blank" rel="noopener">
+  <a href="../publisher/pt/index.html" class="nav-link" target="_blank" rel="noopener">
     Seja um Publisher
   </a>
   <div class="language-selector">
@@ -39,25 +39,25 @@
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a href="/index.html">
+        <a href="/pt/">
           <img src="https://flagcdn.com/br.svg" alt="Português" class="flag-icon" />
           <span>PT-BR</span>
         </a>
       </li>
       <li>
-        <a href="/en/index.html">
+        <a href="/en/">
           <img src="https://flagcdn.com/us.svg" alt="English" class="flag-icon" />
           <span>EN</span>
         </a>
       </li>
       <li>
-        <a href="/es/index.html">
+        <a href="/es/">
           <img src="https://flagcdn.com/es.svg" alt="Español" class="flag-icon" />
           <span>ES</span>
         </a>
       </li>
       <li>
-        <a href="/ch/index.html">
+        <a href="/ch/">
           <img src="https://flagcdn.com/cn.svg" alt="Chinese" class="flag-icon" />
           <span>CN</span>
         </a>
@@ -116,7 +116,7 @@
 
 
     <!-- Core Business -->
-<section class="core-business">
+<section id="core-business" class="core-business">
   <div class="container">
     <div class="core-badge">
       <i class="fas fa-map-pin"></i> Nossos Core Business
@@ -483,7 +483,7 @@
       </div>
       <div class="contato-form">
         <h4>Formulário Estratégico</h4>
-        <form id="contact-form">
+<form id="contact-form" action="https://formspree.io/f/mwpqywva" method="POST">
           <div class="form-group">
             <label for="nome">Nome Completo*</label>
             <input type="text" id="nome" name="nome" required>
@@ -493,8 +493,8 @@
             <input type="email" id="email" name="email" required>
           </div>
           <div class="form-group">
-            <label for="email">Telefone*</label>
-            <input type="email" id="telefone" name="telefone" required>
+            <label for="telefone">Telefone*</label>
+            <input type="tel" id="telefone" name="telefone" required>
           </div>
           <div class="form-group">
             <label for="empresa">Empresa*</label>
@@ -524,7 +524,38 @@
               <i class="fas fa-calendar-check"></i>
               Agendar Diagnóstico Gratuito
             </button>
+</div>
+</form>
+<div id="form-success" style="display:none; color:green; margin-top:1rem; font-weight:bold;">
+  Obrigado! Seu diagnóstico foi agendado. Em breve entraremos em contato.
+</div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("contact-form");
+  const success = document.getElementById("form-success");
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        form.style.display = "none";
+        success.style.display = "block";
+      } else {
+        alert("Ocorreu um erro. Tente novamente.");
+      }
+    }).catch(() => {
+      alert("Ocorreu um erro. Tente novamente.");
+    });
+  });
+});
+</script>
           </div>
         </form>
       </div>
