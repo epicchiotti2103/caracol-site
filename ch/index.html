@@ -1,69 +1,85 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caracol Media - 增长营销与招聘广告专家</title>
-    <meta name="description" content="非传统渠道付费媒体专家。我们通过专有技术和覆盖整个拉丁美洲的专业知识助力企业增长。">
+    <meta name="description" content="我们专注于非传统渠道的付费媒体。凭借专有技术和遍布拉丁美洲的专业知识，帮助企业实现增长。">
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- Navigation -->
     <nav class="navbar">
   <div class="container">
     <div class="nav-brand">
-      <img src="../images/logo-caracol-secundario-negativo.png" alt="Caracol Media" style="max-width: 140px; height: auto;">
-    </div>
-
-    <div class="nav-menu" id="nav-menu">
-      <a href="#hero" class="nav-link">首页</a>
-      <a href="#services" class="nav-link">服务</a>
-      <a href="#diferenciais" class="nav-link">差异化优势</a>
-      <a href="#cases" class="nav-link">成功案例</a>
-      <a href="#latam" class="nav-link">拉丁美洲</a>
-      <a href="#contato" class="nav-link">联系我们</a>
-
-      <!-- 语言切换按钮（右对齐） -->
-      <div class="language-switcher">
-  <a href="../index.html" class="language-btn">
-    <img src="https://flagcdn.com/br.svg" alt="Portuguese" class="flag-icon" />
-    <span>PT</span>
-  </a>
-  <a href="index.html" class="language-btn">
-    <img src="https://flagcdn.com/us.svg" alt="English" class="flag-icon" />
-    <span>EN</span>
-  </a>
-  <a href="../ch/index.html" class="language-btn">
-    <img src="https://flagcdn.com/cn.svg" alt="Chinese" class="flag-icon" />
-    <span>CH</span>
+  <a href="#">
+    <img src="../images/logo-caracol-secundario-negativo.png" alt="Caracol Media" style="max-width: 140px; height: auto;">
   </a>
 </div>
-    </div>
 
-    <div class="nav-toggle" id="nav-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+  <!-- Idiomas alinhados -->
+<div class="nav-menu" id="nav-menu">
+  <a href="#hero" class="nav-link">首页</a>
+  <a href="#services" class="nav-link">服务</a>
+  <a href="#diferenciais" class="nav-link">优势</a>
+  <a href="#cases" class="nav-link">案例</a>
+  <a href="../blog/cn/index.html" class="nav-link">内容</a>
+  <a href="#contato" class="nav-link">联系</a>
+  <a href="../publisher/index.html" class="nav-link" target="_blank" rel="noopener">
+    成为发布商
+  </a>
+  <div class="language-selector">
+    <a href="#" id="current-language">
+      <img src="https://flagcdn.com/cn.svg" alt="Chinese" class="flag-icon" />
+      <span>简体中文</span>
+      <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 0.3em;"></i>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="/pt/">
+          <img src="https://flagcdn.com/br.svg" alt="Português" class="flag-icon" />
+          <span>葡萄牙语</span>
+        </a>
+      </li>
+      <li>
+        <a href="/en/">
+          <img src="https://flagcdn.com/us.svg" alt="English" class="flag-icon" />
+          <span>英语</span>
+        </a>
+      </li>
+      <li>
+        <a href="/es/">
+          <img src="https://flagcdn.com/es.svg" alt="Español" class="flag-icon" />
+          <span>西班牙语</span>
+        </a>
+      </li>
+      <li>
+        <a href="/ch/">
+          <img src="https://flagcdn.com/cn.svg" alt="Chinese" class="flag-icon" />
+          <span>简体中文</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>
 
-<!-- 首屏部分 -->
+<!-- Hero Section -->
 <section id="hero" class="hero">
     <div class="hero-background"></div>
     <div class="container">
         <div class="hero-content">
             <h1 class="hero-title">
-                我们为您的<span class="highlight">增长</span>探索未知领域
+                我们开拓未知领域，助力您的
+                <span class="highlight">增长</span>
             </h1>
             <p class="hero-subtitle">
-                专注于非传统渠道的付费媒体专家。我们利用专有技术和遍布拉丁美洲的专业知识帮助企业扩张。
+                专注于非传统渠道的付费媒体专家。凭借专有技术和遍及整个拉丁美洲的专业知识，助力企业扩展业务。
             </p>
             <div class="social-proof">
                 <div class="proof-item">- 领先金融科技公司的合作伙伴</div>
-                <div class="proof-item">- 在多个市场中验证的高效性</div>
+                <div class="proof-item">- 在多个市场中验证的高效成果</div>
             </div>
             <div class="hero-ctas">
                 <a href="#cases" class="btn btn-primary">
@@ -86,65 +102,86 @@
                     <i class="fas fa-users"></i>
                     <span>招聘广告</span>
                 </div>
+                <div class="card-floating card-3">
+                    <i class="fas fa-tv"></i>
+                    <span>户外数字媒体</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 核心业务 -->
-<section class="core-business">
+<!-- Core Business -->
+<section id="core-business" class="core-business">
   <div class="container">
     <div class="core-badge">
       <i class="fas fa-map-pin"></i> 我们的核心业务
     </div>
     <h2>
       我们以<br>
-      <span class="precisao">外科级精准</span>推动任何业务增长
+      <span class="precisao">精确如手术刀般</span>的方式扩展任何业务
     </h2>
     <div class="core-boxes">
-      <!-- 模块 1 -->
+      <!-- Bloco 1 -->
       <div class="core-card">
         <div class="core-icon orange">
           <i class="fas fa-chart-line"></i>
         </div>
         <h3>增长营销</h3>
-        <p>我们在应用程序和金融科技领域被公认为专家...</p>
+        <p>我们被公认为应用程序和金融科技领域的专家...</p>
         <ul>
-          <li><i class="fas fa-check-circle"></i> 高质量渠道的用户获取</li>
-          <li><i class="fas fa-check-circle"></i> 高级用户细分</li>
-          <li><i class="fas fa-check-circle"></i> 高回报率的再营销</li>
-          <li><i class="fas fa-check-circle"></i> 金融科技的效果营销</li>
-          <li><i class="fas fa-check-circle"></i> 拓展拉丁美洲市场</li>
+          <li><i class="fas fa-check-circle"></i> 在高级渠道进行用户获取</li>
+          <li><i class="fas fa-check-circle"></i> 高级定向策略</li>
+          <li><i class="fas fa-check-circle"></i> 高投资回报的再营销</li>
+          <li><i class="fas fa-check-circle"></i> 金融科技领域的效果营销</li>
+          <li><i class="fas fa-check-circle"></i> 拓展拉美市场</li>
         </ul>
       </div>
 
-      <!-- 模块 2 -->
+      <!-- Bloco 2 -->
       <div class="core-card">
-        <div class="core-icon yellow">
+        <div class="core-icon green">
           <i class="fas fa-briefcase"></i>
         </div>
         <h3>招聘广告技术</h3>
-        <p>面向招聘媒体活动的先进技术...</p>
+        <p>用于招聘广告活动的先进技术平台...</p>
         <ul>
-          <li><i class="fas fa-check-circle"></i> 大规模程序化广告投放</li>
-          <li><i class="fas fa-check-circle"></i> 按职业画像进行定向</li>
-          <li><i class="fas fa-check-circle"></i> 实时CPA优化</li>
-          <li><i class="fas fa-check-circle"></i> Talent.com 技术在巴西的应用</li>
-          <li><i class="fas fa-check-circle"></i> 为人力资源科技提供效果支持</li>
+          <li><i class="fas fa-check-circle"></i> 大规模程序化招聘活动</li>
+          <li><i class="fas fa-check-circle"></i> 按职业画像定向</li>
+          <li><i class="fas fa-check-circle"></i> 实时 CPA 优化</li>
+          <li><i class="fas fa-check-circle"></i> Talent.com 在巴西的技术</li>
+          <li><i class="fas fa-check-circle"></i> 为 HR Tech 提供高效支持</li>
         </ul>
       </div>
+
+      <!-- Bloco 3 - Novo -->
+      <div class="core-card">
+        <div class="core-icon yellow">
+          <i class="fas fa-tv"></i>
+        </div>
+        <h3>户外数字媒体 (DOOH)</h3>
+        <p>我们将您的品牌带到街头，通过数据智能实现高影响力传播...</p>
+        <ul>
+          <li><i class="fas fa-check-circle"></i> 在多个地点投放户外广告</li>
+          <li><i class="fas fa-check-circle"></i> 基于地理位置的定向</li>
+          <li><i class="fas fa-check-circle"></i> 与移动数据和程序化系统集成</li>
+          <li><i class="fas fa-check-circle"></i> 全渠道整合策略</li>
+          <li><i class="fas fa-check-circle"></i> 将 DOOH 用作绩效工具，而非仅仅是品牌曝光</li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- 差异化优势 -->
+<!-- Diferenciais -->
 <section id="diferenciais" class="diferenciais">
   <div class="core-badge">
-    <i class="fas fa-star"></i> 我们的差异化优势
+    <i class="fas fa-star"></i> 我们的优势
   </div>
  <h2 class="diferenciais-frase">
-  为什么增长分析师<br>
-  <span class="laranja ">选择Caracol</span>
+  为什么增长分析师 <br>
+  <span class="laranja ">选择 Caracol</span>
 </h2>
   <div class="diferenciais-grid">
     <div class="diferencial-card">
@@ -154,7 +191,7 @@
       <h3>专有追踪技术</h3>
       <h4>完全透明，完全自主</h4>
       <p>
-        我们的实时追踪技术确保自主性和透明度，使快速调整成为可能，并提供安全的结果。您可以准确看到每一分钱的投放位置。
+        我们的实时跟踪技术确保完全的自主性与透明度，支持快速调整并提供结果保障。您可以清楚看到每一笔资金的投放位置。
       </p>
     </div>
 
@@ -163,9 +200,9 @@
         <i class="fas fa-route"></i>
       </div>
       <h3>非常规渠道</h3>
-      <h4>我们探索他人甚至未曾听闻的路径</h4>
+      <h4>我们探索他人未曾涉足之地</h4>
       <p>
-        当传统代理商在饱和的库存中竞争时，我们探索优质渠道和许多机构忽视的战略细分。这才是真正的增长机会所在。
+        当传统机构仍在竞争那些早已饱和的资源时，我们则专注于高端渠道和战略性定向，发掘真正的增长机会。
       </p>
     </div>
 
@@ -173,10 +210,10 @@
       <div class="diferencial-icon">
         <i class="fas fa-globe-americas"></i>
       </div>
-      <h3>拉美市场专业知识</h3>
-      <h4>我们在别人无法涉足的地方实现增长</h4>
+      <h3>拉美市场专长</h3>
+      <h4>我们能扩展至他人达不到的地方</h4>
       <p>
-        我们活跃于传统代理无法进入的市场，拓展真正的增长机会。我们了解每个国家的法规、文化和本地广告资源。
+        我们深耕传统机构难以进入的市场，开拓真实的增长空间。我们熟悉每个国家的法规、文化与本地广告资源。
       </p>
     </div>
 
@@ -184,61 +221,63 @@
       <div class="diferencial-icon">
         <i class="fas fa-handshake"></i>
       </div>
-      <h3>战略合作伙伴，而非仅是执行者</h3>
-      <h4>增长咨询，而非仅限媒体</h4>
+      <h3>战略合作，而非单纯执行</h3>
+      <h4>我们是增长顾问，而不只是投放商</h4>
       <p>
-        除了媒体管理之外，我们还是业务增长的战略合作伙伴。通过密切且人性化的支持，我们帮助品牌做出明智决策并充分发挥其广告活动的潜力。
+        除了媒体管理，我们还作为业务增长的战略合作伙伴参与其中。通过贴心服务与深入交流，协助品牌做出明智决策，并从广告活动中获得最大收益。
       </p>
     </div>
   </div>
 </div>
 </section>
 
-<!-- 成功案例 -->
+
+<!-- Cases de Sucesso -->
 <section id="cases" class="cases">
-  <div class="container">
-    
-    <div class="core-badge core-badge-yellow">
-      <i class="fas fa-trophy"></i> 成功案例
-    </div>
-    <h2 class="cases-frase">
-      <span class="amarelo">结果</span> 自己会说话
-    </h2>
-    <span class="subtitle">保密性已维护，影响力已验证</span>
-    
-    <div class="cases-grid">
-      <!-- 案例 1 -->
-      <div class="case-box case-orange">
-        <h3>金融科技案例 – 信用卡</h3>
-        <p>通过基于收入的细分扩大信用卡批准数量</p>
-        <div class="case-impact">
-          <strong>340%</strong>
-          <span>在保持潜在客户质量的同时，实现每月批准增长</span>
-        </div>
-      </div>
-
-      <!-- 案例 2 -->
-      <div class="case-box case-green">
-        <h3>数字银行案例</h3>
-        <p>用户获取 + 重新唤回同步进行</p>
-        <div class="case-impact">
-          <strong>+2年</strong>
-          <span>客户持续增长，投资回报率超越竞争对手</span>
-        </div>
-      </div>
-
-      <!-- 案例 3 -->
-      <div class="case-box case-lime">
-        <h3>招聘科技案例</h3>
-        <p>多国招聘广告活动</p>
-        <div class="case-impact">
-          <strong>60%</strong>
-          <span>每次雇佣成本低于市场平均水平，扩展至5个国家</span>
-        </div>
-      </div>
+    <div class="container">
+        
+       <div class="core-badge core-badge-yellow">
+<i class="fas fa-trophy"></i> 成功案例
+</div>
+<h2 class="cases-frase">
+  <span class="amarelo">成果</span> 自会说明一切
+</h2>
+<span class="subtitle">在保护机密的前提下，展示真实影响力</span>
+        
+       <div class="cases-grid">
+  <!-- CASE 1 -->
+  <div class="case-box case-orange">
+    <h3>金融科技案例 – 信用卡</h3>
+    <p>通过收入细分提升信用卡核准率</p>
+    <div class="case-impact">
+      <strong>340%</strong>
+      <span>月度核准量增长，同时保持潜在客户质量</span>
     </div>
   </div>
+
+  <!-- CASE 2 -->
+  <div class="case-box case-green">
+    <h3>数字银行案例</h3>
+    <p>用户获取与再激活同时进行</p>
+    <div class="case-impact">
+      <strong>超过2年</strong>
+      <span>客户持续增长，ROI 优于竞争对手</span>
+    </div>
+  </div>
+
+  <!-- CASE 3 -->
+  <div class="case-box case-lime">
+    <h3>招聘科技案例</h3>
+    <p>多国招聘广告活动</p>
+    <div class="case-impact">
+      <strong>60%</strong>
+      <span>每次招聘成本低于行业平均，扩展至5个国家</span>
+    </div>
+  </div>
+</div>
+</div>
 </section>
+
 
 <section id="latam" class="latam">
   <div class="container">
@@ -248,249 +287,270 @@
       </div>
 
       <h2 class="latam-title">
-        <span class="latam-title-white">超越</span>
-        <span class="latam-title-green">国界</span>
+        <span class="latam-title-white">突破</span>
+        <span class="latam-title-green">边界限制</span>
       </h2>
-      <span class="subtitle">当别人看到障碍，我们看到机会</span>
+<span class="subtitle">别人看到的是障碍，我们看到的是机遇</span>
+
     </div>
 
     <div class="latam-content">
       <div class="latam-expertise-cinza">
         <p class="latam-expertise">
-          我们在非常规渠道方面的专业知识覆盖整个拉丁美洲。我们了解每个市场的细微差别、本地法规以及传统代理商无法获得的优质广告资源。
+          我们在非常规渠道方面的专业知识已遍及整个拉丁美洲。我们深谙每个市场的细节、当地法规以及传统代理无法触及的优质资源。
         </p>
         <p class="latam-expertise">
-          当竞争对手仍然局限于巴西时，我们已经主导以下领域：
+          当竞争对手还局限于巴西，我们已全面覆盖：
         </p>
-        <div class="latam-expertise-cinza"></div>
+        
         <ul class="latam-features">
           <li><i class="fas fa-map-marker-alt"></i> 高需求、低竞争市场</li>
-          <li><i class="fas fa-inventory"></i> 各国独家广告资源</li>
-          <li><i class="fas fa-crosshairs"></i> 本地特定细分市场</li>
-          <li><i class="fas fa-gavel"></i> 市场特定法规</li>
-          <li><i class="fas fa-handshake"></i> 与地区媒体直接合作</li>
+          <li><i class="fas fa-folder-open"></i> 各国独家媒体资源</li>
+          <li><i class="fas fa-crosshairs"></i> 本地化精准定向</li>
+          <li><i class="fas fa-gavel"></i> 各市场的法规合规性</li>
+          <li><i class="fas fa-handshake"></i> 与地区出版商的直接合作</li>
         </ul>
         <div class="latam-result">
-          <strong>结果：</strong> 您的广告活动将在竞争对手无法触及的地方实现增长。
+          <strong>成果：</strong> 您的广告能够在竞争者尚未进入的市场中脱颖而出。
         </div>
       </div>
+      
     </div>
   </div>
 </section>
 
-<!-- 我们为谁服务 -->
+<!-- Para Quem Trabalhamos -->
 <section id="publico" class="publico">
-  <div class="container">
-    <div class="core-badge core-badge-orange">
-      <i class="fas fa-user-tie"></i> 目标受众
+    <div class="container">
+      <div class="core-badge core-badge-orange">
+<i class="fas fa-user-tie"></i> 目标群体
+</div>
+<h2 class="diferenciais-frase">
+  被那些
+  <span class="laranja">追求极致表现</span>的人所选择
+</h2>
+        
+        <div class="publico-grid">
+            <div class="publico-card">
+                <div class="publico-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>增长经理（Growth Managers）</h3>
+                <p>希望高效扩张并突破传统渠道限制</p>
+            </div>
+
+            <div class="publico-card">
+                <div class="publico-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3>市场负责人（Heads de Marketing）</h3>
+                <p>追求可预测成果与优质广告资源</p>
+            </div>
+
+            <div class="publico-card">
+                <div class="publico-icon">
+                    <i class="fas fa-magnifying-glass-chart"></i>
+                </div>
+                <h3>绩效分析师（Performance Analysts）</h3>
+                <p>通过高级优化策略实现更高 ROI</p>
+            </div>
+
+            <div class="publico-card">
+                <div class="publico-icon">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <h3>人力资源科技公司与初创企业</h3>
+                <p>需要真正具备技术能力的招聘广告解决方案</p>
+            </div>
+
+            <div class="publico-card">
+                <div class="publico-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>正在扩张的金融科技公司</h3>
+                <p>希望通过精准定位征服拉美市场</p>
+            </div>
+        </div>
     </div>
-    <h2 class="diferenciais-frase">
-      被那些
-      <span class="laranja">追求高绩效</span> 的人选择
-    </h2>
-
-    <div class="publico-grid">
-      <div class="publico-card">
-        <div class="publico-icon">
-          <i class="fas fa-chart-line"></i>
-        </div>
-        <h3>增长经理</h3>
-        <p>需要高效扩展并探索非常规渠道的专业人士</p>
-      </div>
-
-      <div class="publico-card">
-        <div class="publico-icon">
-          <i class="fas fa-bullhorn"></i>
-        </div>
-        <h3>市场营销主管</h3>
-        <p>希望获得可预测结果并接触优质广告资源的领导者</p>
-      </div>
-
-      <div class="publico-card">
-        <div class="publico-icon">
-          <i class="fas fa-magnifying-glass-chart"></i>
-        </div>
-        <h3>绩效分析师</h3>
-        <p>通过高级优化寻求更高投资回报率的专家</p>
-      </div>
-
-      <div class="publico-card">
-        <div class="publico-icon">
-          <i class="fas fa-users-cog"></i>
-        </div>
-        <h3>人力资源科技与初创企业</h3>
-        <p>需要真正技术支持招聘活动的企业</p>
-      </div>
-
-      <div class="publico-card">
-        <div class="publico-icon">
-          <i class="fas fa-rocket"></i>
-        </div>
-        <h3>扩展中的金融科技公司</h3>
-        <p>希望通过精准细分主导拉丁美洲市场的公司</p>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- 流程 -->
+
+<!-- Processo -->
 <section id="processo" class="processo">
-  <div class="container">
-    <div class="core-badge core-badge-yellow">
-      <i class="fas fa-fingerprint"></i> Caracol 方法
+    <div class="container">
+        <div class="core-badge core-badge-yellow">
+<i class="fas fa-fingerprint"></i> Caracol 方法
+</div>
+        <h2 class="cases-frase">
+我们如何将挑战 <span class="amarelo">转化为增长</span>
+</h2>
+          <div class="processo-timeline-spacer"></div>
+        <div class="processo-timeline">
+            <div class="processo-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>战略诊断</h3>
+                    <p>分析您的业务、竞争对手以及未被开发的机会</p>
+                </div>
+            </div>
+        <div class="processo-arrow">
+    <i class="fas fa-angle-down"></i>
+</div>
+            <div class="processo-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>渠道映射</h3>
+                    <p>识别与您的业务最契合的非常规媒体资源</p>
+                </div>
+            </div>
+<div class="processo-arrow">
+    <i class="fas fa-angle-down"></i>
+</div>
+            <div class="processo-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>技术实施</h3>
+                    <p>配置我们自有的跟踪系统和智能自动化工具</p>
+                </div>
+            </div>
+<div class="processo-arrow">
+    <i class="fas fa-angle-down"></i>
+</div>
+            <div class="processo-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>持续优化</h3>
+                    <p>基于数据进行实时调整，而非凭感觉决策</p>
+                </div>
+            </div>
+<div class="processo-arrow">
+    <i class="fas fa-angle-down"></i>
+</div>
+            <div class="processo-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>区域扩展</h3>
+                    <p>将成功经验复制到其他市场</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <h2 class="cases-frase">
-      我们如何将挑战 <span class="amarelo">转化为增长</span>
-    </h2>
-
-    <div class="processo-timeline-spacer"></div>
-
-    <div class="processo-timeline">
-      <div class="processo-step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h3>战略诊断</h3>
-          <p>我们分析您的业务、竞争对手和未被开发的机会</p>
-        </div>
-      </div>
-
-      <div class="processo-arrow">
-        <i class="fas fa-angle-down"></i>
-      </div>
-
-      <div class="processo-step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h3>渠道映射</h3>
-          <p>我们识别最适合您画像的非常规广告资源</p>
-        </div>
-      </div>
-
-      <div class="processo-arrow">
-        <i class="fas fa-angle-down"></i>
-      </div>
-
-      <div class="processo-step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h3>技术部署</h3>
-          <p>我们部署专有追踪系统和智能自动化工具</p>
-        </div>
-      </div>
-
-      <div class="processo-arrow">
-        <i class="fas fa-angle-down"></i>
-      </div>
-
-      <div class="processo-step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h3>持续优化</h3>
-          <p>基于数据进行实时调整，而非猜测</p>
-        </div>
-      </div>
-
-      <div class="processo-arrow">
-        <i class="fas fa-angle-down"></i>
-      </div>
-
-      <div class="processo-step">
-        <div class="step-number">5</div>
-        <div class="step-content">
-          <h3>区域扩展</h3>
-          <p>我们将成功模式复制到新的拉美市场</p>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- 联系表单 -->
+<!-- Formulário de Contato -->
 <section id="contato" class="contato">
   <div class="container">
     <div class="contato-header" style="text-align:center;">
       <h2 class="latam-title" style="margin-bottom:0.5rem;">
-        <span class="latam-title-white">让我们谈谈</span>
-        <span class="latam-title-green">关于业绩</span>
+        <span class="latam-title-white">让我们谈谈 </span>
+        <span class="latam-title-green">绩效表现</span>
       </h2>
       <h4 class="subtitle" style="margin-top:0.5rem;">准备好探索未开发的市场了吗？</h4>
     </div>
     <div class="contato-grid">
       <div class="contato-text">
-        <p>
-          如果您已经看到这里，说明您已经明白，付费媒体远远不止表面。
-        </p>
-        <p>
-          让我们向您展示，在您的竞争对手争夺那些饱和渠道时，您所错过的机会。
-        </p>
+        <p style="color: #fff;">
+  如果您看到这里，您可能已经意识到付费媒体远不止于表面。
+</p>
+<p style="color: #fff;">
+  我们将向您展示在竞争对手争夺那些饱和渠道时，您可能错过的真实机会。
+</p>
         <div class="contato-info">
           <div class="info-item">
             <i class="fas fa-envelope"></i>
             <span>
-              <a href="mailto:admin@caracol.media">admin@caracol.media</a>
+              <a href="mailto:faleconosco@caracol.media">faleconosco@caracol.media</a>
             </span>
           </div>
           <div class="info-item">
-            <i class="fas fa-phone"></i>
-            <span>+55 (11) 99999-9999</span>
-          </div>
+  <i class="fas fa-phone"></i>
+  <span>
+    <a href="https://wa.me/5511963421491?text=Olá%2C%20gostaria%20de%20mais%20informações!" target="_blank" style="color: inherit; text-decoration: none;">
+      +55 (11) 96342-1491
+    </a>
+  </span>
+</div>
           <div class="info-item">
             <i class="fas fa-map-marker-alt"></i>
-            <span>巴西 圣保罗</span>
+            <span>巴西圣保罗</span>
           </div>
         </div>
       </div>
-      <div class="contato-form">
+<div class="contato-form">
         <h4>战略表单</h4>
-        <form id="contact-form">
+<form id="contact-form" action="https://formspree.io/f/mwpqywva" method="POST">
           <div class="form-group">
-            <label for="nome">姓名</label>
+            <label for="nome">全名*</label>
             <input type="text" id="nome" name="nome" required>
           </div>
           <div class="form-group">
-            <label for="email">电子邮箱</label>
+            <label for="email">电子邮箱*</label>
             <input type="email" id="email" name="email" required>
           </div>
           <div class="form-group">
-            <label for="empresa">公司</label>
+            <label for="telefone">电话*</label>
+            <input type="tel" id="telefone" name="telefone" required>
+          </div>
+          <div class="form-group">
+            <label for="empresa">公司*</label>
             <input type="text" id="empresa" name="empresa" required>
           </div>
           <div class="form-group">
             <label for="cargo">职位</label>
-            <input type="text" id="cargo" name="cargo" required>
+            <input type="text" id="cargo" name="cargo" >
           </div>
           <div class="form-group">
-            <label for="desafio">您面临的主要增长挑战是什么？</label>
-            <textarea id="desafio" name="desafio" rows="3" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="orcamento">每月媒体预算</label>
-            <select id="orcamento" name="orcamento" required>
-              <option value="">选择预算区间</option>
-              <option value="até-10k">高达 R$ 10,000</option>
-              <option value="10k-50k">R$ 10,000 - R$ 50,000</option>
-              <option value="50k-100k">R$ 50,000 - R$ 100,000</option>
-              <option value="100k-500k">R$ 100,000 - R$ 500,000</option>
-              <option value="500k+">超过 R$ 500,000</option>
-            </select>
+            <label for="desafio">您在增长方面的主要挑战是什么？</label>
+            <textarea id="desafio" name="desafio" rows="3" ></textarea>
           </div>
           <div class="form-group">
             <label for="mercados">感兴趣的市场</label>
-            <input type="text" id="mercados" name="mercados" placeholder="例如：巴西、墨西哥、哥伦比亚">
+            <input type="text" id="mercados" name="mercados" placeholder="例如：中国、巴西、墨西哥">
           </div>
           <div class="form-group">
-            <label for="modelo">业务模式 / 行业垂直</label>
-            <input type="text" id="modelo" name="modelo" placeholder="例如：金融科技、电子商务、SaaS">
+            <label for="modelo">商业模式 / 行业</label>
+            <input type="text" id="modelo" name="modelo" placeholder="例如：金融科技、电商、SaaS">
           </div>
+  <small style="display:block; margin-bottom:0.2rem; margin-top:-0.5rem; color:#aaa; font-size: 0.95em; font-style: italic;">
+    *必填字段
+  </small>
           <div class="form-buttons">
             <button type="submit" class="btn btn-primary2">
               <i class="fas fa-calendar-check"></i>
-              安排免费诊断
+              预约免费诊断
             </button>
-            <button type="button" class="btn btn-secondary" onclick="downloadCaseStudy()">
-              <i class="fas fa-download"></i>
-              下载案例研究
-            </button>
+</div>
+</form>
+<div id="form-success" style="display:none; color:green; margin-top:1rem; font-weight:bold;">
+  谢谢！您的诊断已预约。我们将尽快与您联系。
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("contact-form");
+  const success = document.getElementById("form-success");
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        form.style.display = "none";
+        success.style.display = "block";
+      } else {
+        alert("发生错误。请重试。");
+      }
+    }).catch(() => {
+      alert("发生错误。请重试。");
+    });
+  });
+});
+</script>
           </div>
         </form>
       </div>
@@ -498,26 +558,25 @@
   </div>
 </section>
 
-<!-- 页脚 -->
+<!-- Footer -->
 <footer class="footer">
   <div class="footer-container">
     <div class="footer-col brand-col">
-      <img src="../images/logo2.png" alt="Caracol Media" style="width: 100%; max-width: 240px; height: auto;">
-      <p class="tagline">增长营销 • 招聘广告</p>
+      <img src="../images/logo2.png" alt="Caracol Media" style="width: 100%; max-width: 240px; height: auto;"> 
     </div>
     
     <div class="footer-col">
       <h4>服务</h4>
       <ul>
         <li><a href="#growth">增长营销</a></li>
-        <li><a href="#job">招聘广告</a></li>
+        <li><a href="#job">职位广告</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
       <h4>公司</h4>
       <ul>
-        <li><a href="#diferenciais">差异化优势</a></li>
+        <li><a href="#diferenciais">我们的优势</a></li>
         <li><a href="#cases">成功案例</a></li>
         <li><a href="#processo">方法论</a></li>
       </ul>
@@ -526,31 +585,40 @@
     <div class="footer-col">
       <h4>联系方式</h4>
       <ul>
-        <li><a href="#contato">联系我们</a></li>
-        <li><a href="mailto:contato@caracolmedia.com">contato@caracolmedia.com</a></li>
-        <li><a href="tel:+5511999999999">+55 (11) 99999-9999</a></li>
+        <li><a href="mailto:faleconosco@caracolmedia.com">faleconosco@caracolmedia.com</a></li>
+        <li>
+          <a href="https://wa.me/5511963421491?text=Olá%2C%20gostaria%20de%20mais%20informações!" target="_blank" style="color: inherit; text-decoration: none;">
+            +55 (11) 96342-1491
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>合作伙伴</h4>
+      <ul>
+        <li><a href="publisher/html_2.html">注册成为发布者</a></li>
       </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>© 2025 Caracol Media。版权所有。</p>
+    <p>© 2025 Caracol Media. 版权所有。</p>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="js/main.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
 <script>
 function randomFloat(min, max) {
   return Math.random() * (max - min) + min;
 }
 
 function animateCard(card) {
-  const x = randomFloat(-30, 30); // 左右移动像素
-  const y = randomFloat(-30, 30); // 上下移动像素
+  const x = randomFloat(-30, 30);
+  const y = randomFloat(-30, 30);
   card.style.transition = "transform 1.5s cubic-bezier(.4,2,.6,1)";
   card.style.transform = `translate(${x}px, ${y}px)`;
-  setTimeout(() => animateCard(card), randomFloat(1200, 2200)); // 随机时间
+  setTimeout(() => animateCard(card), randomFloat(1200, 2200));
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -560,5 +628,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (card2) animateCard(card2);
 });
 </script>
+
 </body>
 </html>
