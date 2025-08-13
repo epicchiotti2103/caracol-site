@@ -2162,3 +2162,15 @@ footer ul li a:hover {
   border-radius: 6px;
   font-size: 1.04rem;
 }
+@media (max-width: 900px) {
+  .core-boxes {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .core-card {
+    max-width: 100%;
+    width: 100%;
+    flex: 1 1 100%;
+  }
+}
