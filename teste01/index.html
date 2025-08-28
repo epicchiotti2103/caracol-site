@@ -1,1 +1,41 @@
-<iframe width="600" height="443" src="https://lookerstudio.google.com/embed/reporting/27e750ac-fed9-4ef4-aecf-511aead861c3/page/j3sRF" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Tela Cheia</title>
+  <style>
+    /* Remove margens e paddings padrão */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    /* Contêiner que ocupa 100% da tela */
+    #dashboard-fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    /* O iframe preenche todo o contêiner */
+    #dashboard-fullscreen iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="dashboard-fullscreen">
+    <iframe
+      src="https://lookerstudio.google.com/embed/reporting/27e750ac-fed9-4ef4-aecf-511aead861c3/page/j3sRF"
+      allowfullscreen
+      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+    </iframe>
+  </div>
+
+</body>
+</html>
