@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caracol Media - Especialistas em Growth Marketing e Job Advertising</title>
+    <meta name="description" content="Especialistas em mídia paga para canais não convencionais. Escalamos negócios com tecnologia proprietária e expertise em toda América Latina.">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">
+  <a href="#">
+    <img src="../images/logo-caracol-secundario-negativo.png" alt="Caracol Media" style="max-width: 140px; height: auto;">
+  </a>
+</div>
+
+
+  <!-- Idiomas alinhados -->
+<div class="nav-menu" id="nav-menu">
+  <a href="#hero" class="nav-link">Início</a>
+  <a href="#core-business" class="nav-link">Serviços</a>
+  <a href="#diferenciais" class="nav-link">Diferenciais</a>
+  <a href="#cases" class="nav-link">Cases</a>
+  <a href="../blog/pt/index.html" class="nav-link">Conteúdo</a>
+  <a href="#contato" class="nav-link">Contato</a>
+  <a href="../publisher/pt/index.html" class="nav-link" target="_blank" rel="noopener">
+    Seja um Publisher
+  </a>
+  <div class="language-selector">
+    <a href="#" id="current-language">
+      <img src="https://flagcdn.com/br.svg" alt="Português" class="flag-icon" />
+      <span>PT-BR</span>
+      <i class="fas fa-chevron-down" style="font-size: 0.8em; margin-left: 0.3em;"></i>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="/pt/">
+          <img src="https://flagcdn.com/br.svg" alt="Português" class="flag-icon" />
+          <span>PT-BR</span>
+        </a>
+      </li>
+      <li>
+        <a href="/en/">
+          <img src="https://flagcdn.com/us.svg" alt="English" class="flag-icon" />
+          <span>EN</span>
+        </a>
+      </li>
+      <li>
+        <a href="/es/">
+          <img src="https://flagcdn.com/es.svg" alt="Español" class="flag-icon" />
+          <span>ES</span>
+        </a>
+      </li>
+      <li>
+        <a href="/ch/">
+          <img src="https://flagcdn.com/cn.svg" alt="Chinese" class="flag-icon" />
+          <span>CN</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<!-- =========================
+     FORMULÁRIO — Caracol
+========================= -->
+<section id="formulario" class="formulario">
+  <div class="container">
+    <div class="section-header">
+      <span class="core-badge core-badge-yellow"><i class="fa-solid fa-pen-to-square"></i> Formulário de Inscrição</span>
+      <h2>Vamos te conhecer</h2>
+      <p class="subtitle">Leva ~5 min e você pode salvar rascunho automaticamente neste navegador.</p>
+    </div>
+
+    <!-- Progress -->
+    <div class="wizard-progress" aria-hidden="true">
+      <div class="wizard-progress-bar"><span id="wizardProgressFill" style="width: 10%"></span></div>
+      <div class="wizard-steps">
+        <span class="dot active">1</span><span class="dot">2</span><span class="dot">3</span><span class="dot">4</span><span class="dot">5</span>
+      </div>
+    </div>
+
+    <form id="caracolForm" novalidate>
+      <!-- ========== STEP 1: Dados Pessoais ========== -->
+      <fieldset class="form-step current" data-step="1" aria-label="Dados pessoais">
+        <legend>Vamos te conhecer</legend>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="nomePreferido">Como você quer ser chamado? <span class="req">*</span></label>
+            <input type="text" id="nomePreferido" name="nomePreferido" required placeholder="Ex.: Ana, João, Lio" />
+            <small class="hint">Nome preferido para comunicação.</small>
+          </div>
+
+          <div class="field">
+            <label for="email">E-mail <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="voce@exemplo.com" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="cidadeEstado">Cidade / Estado <span class="req">*</span></label>
+            <input type="text" id="cidadeEstado" name="cidadeEstado" required placeholder="Botucatu/SP" />
+          </div>
+          <div class="field">
+            <label for="linkedin">LinkedIn ou outra rede profissional</label>
+            <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/seuusuario" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="curso">Curso / Universidade <span class="req">*</span></label>
+            <input type="text" id="curso" name="curso" required placeholder="Eng. Produção — UNESP" />
+          </div>
+
+          <div class="field">
+            <label for="cv">Upload do seu CV (PDF, máx. 10MB) <span class="req">*</span></label>
+            <input type="file" id="cv" name="cv" required accept="application/pdf" />
+            <small class="hint" id="cvStatus">Anexe seu PDF. Tamanho máximo: 10MB.</small>
+          </div>
+        </div>
+
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-primary next">Próximo</button>
+        </div>
+      </fieldset>
+
+      <!-- ========== STEP 2: Idiomas ========== -->
+      <fieldset class="form-step" data-step="2" aria-label="Idiomas">
+        <legend>Idiomas</legend>
+
+        <div class="field">
+          <label>Qual seu nível de inglês? <span class="req">*</span></label>
+          <div class="choices choices-columns">
+            <label><input type="radio" name="ingles" value="Iniciante" required> Iniciante</label>
+            <label><input type="radio" name="ingles" value="Intermediário"> Intermediário</label>
+            <label><input type="radio" name="ingles" value="Avançado"> Avançado</label>
+            <label><input type="radio" name="ingles" value="Fluente"> Fluente</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Você fala espanhol?</label>
+          <div class="choices choices-columns">
+            <label><input type="radio" name="espanhol" value="Não" checked> Não</label>
+            <label><input type="radio" name="espanhol" value="Intermediário"> Intermediário</label>
+            <label><input type="radio" name="espanhol" value="Avançado"> Avançado</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="outrosIdiomas">Outros idiomas?</label>
+          <input type="text" id="outrosIdiomas" name="outrosIdiomas" placeholder="Ex.: Francês básico" />
+        </div>
+
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-secondary prev">Voltar</button>
+          <button type="button" class="btn btn-primary next">Próximo</button>
+        </div>
+      </fieldset>
+
+      <!-- ========== STEP 3: Experiências & Habilidades ========== -->
+      <fieldset class="form-step" data-step="3" aria-label="Experiências">
+        <legend>Experiências</legend>
+
+        <div class="field">
+          <label for="experiencia">Você tem alguma experiência profissional? Se sim, conte um pouco.</label>
+          <textarea id="experiencia" name="experiencia" rows="4" placeholder="Estágio, projetos, empresa júnior, freela..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Marque as habilidades que você já tem (ou está aprendendo):</label>
+          <div class="choices choices-grid">
+            <label><input type="checkbox" name="skills" value="Excel / Google Sheets"> Excel / Google Sheets</label>
+            <label><input type="checkbox" name="skills" value="Análise de dados"> Análise de dados</label>
+            <label><input type="checkbox" name="skills" value="Copywriting / Escrita criativa"> Copywriting / Escrita criativa</label>
+            <label><input type="checkbox" name="skills" value="Design / Social media"> Design / Social media</label>
+            <label><input type="checkbox" name="skills" value="Prospecção B2B"> Prospecção B2B (Apollo, HubSpot, LinkedIn)</label>
+            <label><input type="checkbox" name="skills" value="AI (ChatGPT, Claude, Manus, etc)"> AI (ChatGPT, Claude, Manus, etc)</label>
+            <label><input type="checkbox" name="skills" value="Vendas / Reuniões Comerciais"> Vendas / Reuniões Comerciais</label>
+            <label><input type="checkbox" name="skills" value="Atendimento ao cliente"> Atendimento ao cliente</label>
+            <label><input type="checkbox" name="skills" value="Produção de conteúdos"> Produção de conteúdos para Blogs e sites</label>
+            <label class="span-2">
+              <span>Outros:</span>
+              <input type="text" name="skills_outros" placeholder="Liste outras habilidades" />
+            </label>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="motivacaoCurso">O que te motivou a escolher (e continuar) seu curso de graduação?</label>
+            <textarea id="motivacaoCurso" name="motivacaoCurso" rows="3"></textarea>
+          </div>
+          <div class="field">
+            <label for="habilidadesAprender">Habilidades que você quer aprender com os sócios da Caracol</label>
+            <textarea id="habilidadesAprender" name="habilidadesAprender" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-secondary prev">Voltar</button>
+          <button type="button" class="btn btn-primary next">Próximo</button>
+        </div>
+      </fieldset>
+
+      <!-- ========== STEP 4: Trilha ========== -->
+      <fieldset class="form-step" data-step="4" aria-label="Trilha">
+        <legend>Escolha sua trilha</legend>
+
+        <div class="field">
+          <label>Qual trilha você quer seguir? <span class="req">*</span></label>
+          <div class="choices choices-cards">
+            <label class="card-choice">
+              <input type="radio" name="trilha" value="Vendas & Marketing" required />
+              <div class="card">
+                <i class="fa-solid fa-bullhorn"></i>
+                <strong>Vendas &amp; Marketing</strong>
+              </div>
+            </label>
+
+            <label class="card-choice">
+              <input type="radio" name="trilha" value="Operações" />
+              <div class="card">
+                <i class="fa-solid fa-gears"></i>
+                <strong>Operações</strong>
+              </div>
+            </label>
+
+            <label class="card-choice">
+              <input type="radio" name="trilha" value="Atendimento / Mídia" />
+              <div class="card">
+                <i class="fa-solid fa-headset"></i>
+                <strong>Atendimento / Mídia</strong>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-secondary prev">Voltar</button>
+          <button type="button" class="btn btn-primary next">Próximo</button>
+        </div>
+      </fieldset>
+
+      <!-- ========== STEP 5: Questionário de Cenários ========== -->
+      <fieldset class="form-step" data-step="5" aria-label="Questionário">
+        <legend>Questionário</legend>
+        <p class="subtitle">Não existe resposta perfeita. Queremos entender sua forma de pensar, agir e aprender.</p>
+
+        <div class="carousel-container">
+        <div class="qblock">
+          <h4>1) Campanha global</h4>
+          <p>Você recebe uma campanha para rodar com um cliente da Ásia. O briefing chega em inglês, cheio de termos técnicos que você não domina. O que faz?</p>
+          <div class="choices">
+            <label><input type="radio" name="q1" value="Traduzo e sigo" required> Jogo no tradutor e sigo em frente.</label>
+            <label><input type="radio" name="q1" value="Peço ajuda ao time"> Peço ajuda ao time logo cedo.</label>
+            <label><input type="radio" name="q1" value="Pesquiso sozinho"> Pesquiso sozinho até entender.</label>
+            <label><input type="radio" name="q1" value="Respondo rápido ao cliente"> Respondo rápido para ganhar tempo.</label>
+          </div>
+        </div>
+
+        <div class="qblock">
+          <h4>2) Dados brutos</h4>
+          <p>O publisher chinês te manda uma planilha com 30 mil linhas de dados. Qual seu primeiro passo?</p>
+          <div class="choices">
+            <label><input type="radio" name="q2" value="Métricas básicas" required> Puxo CTR/CPA para checar saúde.</label>
+            <label><input type="radio" name="q2" value="Visualizo antes"> Crio filtros/gráficos e visualizo.</label>
+            <label><input type="radio" name="q2" value="Pergunto meta"> Pergunto qual é a meta principal.</label>
+            <label><input type="radio" name="q2" value="Confiro consistência"> Confiro se bate com relatórios oficiais.</label>
+          </div>
+        </div>
+
+        <div class="qblock">
+          <h4>3) Cliente exigente</h4>
+          <p>Em uma call, o cliente pressiona por resultados imediatos. Como você reage?</p>
+          <div class="choices">
+            <label><input type="radio" name="q3" value="Escuto e levo ao time" required> Escuto e levo para o time.</label>
+            <label><input type="radio" name="q3" value="Respondo na hora"> Respondo na hora com o que já fazemos.</label>
+            <label><input type="radio" name="q3" value="Alinho métricas"> Pergunto as métricas prioritárias.</label>
+            <label><input type="radio" name="q3" value="Acalmo o cliente"> TENTO acalmar e mostrar processo.</label>
+          </div>
+        </div>
+
+        <div class="qblock">
+          <h4>4) Ritmo Caracol</h4>
+        <p>Num dia comum surgem 3 reuniões internacionais, uma planilha gigante e uma campanha para revisar. O que te empolga mais nesse caos?</p>
+          <div class="choices">
+            <label><input type="radio" name="q4" value="Pessoas mundo todo" required> Conversar com gente do mundo todo.</label>
+            <label><input type="radio" name="q4" value="Insights nos dados"> Descobrir insights nos dados.</label>
+            <label><input type="radio" name="q4" value="Resolver rápido"> Resolver rápido e entregar resultado.</label>
+            <label><input type="radio" name="q4" value="Organizar processos"> Organizar tudo e dar ordem ao processo.</label>
+          </div>
+        </div>
+
+        <div class="qblock">
+          <h4>5) Conteúdo sem briefing</h4>
+<p>Você precisa criar um post para LinkedIn sem orientação prévia. Qual sua abordagem?</p>
+          <div class="choices">
+            <label><input type="radio" name="q5" value="Cases globais" required> Caço referências em cases globais.</label>
+            <label><input type="radio" name="q5" value="Bench de mercado"> Analiso posts que performaram e adapto.</label>
+            <label><input type="radio" name="q5" value="Ousado do zero"> Crio algo ousado para testar.</label>
+            <label><input type="radio" name="q5" value="Alinho com liderança"> Pergunto à liderança o foco.</label>
+          </div>
+        </div>
+
+        <div class="qblock">
+          <h4>6) Aprendizado rápido</h4>
+<p>Você recebe uma ferramenta nova (ex.: HubSpot, Apollo). Como aprende?</p>
+          <div class="choices">
+            <label><input type="radio" name="q6" value="Tutoriais" required> Procuro tutoriais/manuais.</label>
+            <label><input type="radio" name="q6" value="Pergunto ao time"> Pergunto a alguém do time.</label>
+            <label><input type="radio" name="q6" value="Aprendo na prática"> Testo na prática.</label>
+            <label><input type="radio" name="q6" value="Crio meu guia"> Organizo um guia passo a passo.</label>
+          </div>
+        </div>
+
+        <div class="qblock">
+          <h4>7) Erro descoberto</h4>
+<p>Você encontra um erro numa campanha que ninguém notou. O que faz?</p>
+          <div class="choices">
+            <label><input type="radio" name="q7" value="Corrijo sozinho" required> Corrijo sozinho, sem alarde.</label>
+            <label><input type="radio" name="q7" value="Comunico time"> Comunico o time.</label>
+            <label><input type="radio" name="q7" value="Explico e proponho"> Explico o erro e proponho solução.</label>
+            <label><input type="radio" name="q7" value="Espero"> Espero para ver se alguém percebe.</label>
+          </div>
+        </div>
+
+        <div class="qblock">
+          <h4>8) Prazo apertado</h4>
+<p>Um cliente pede uma entrega em 24h, mas você já tem outras tarefas. Sua reação inicial é:</p>
+          <div class="choices">
+            <label><input type="radio" name="q8" value="Renegocio" required> Tento renegociar prazos.</label>
+            <label><input type="radio" name="q8" value="Ataco logo"> Ataco logo, mesmo sem estar perfeito.</label>
+            <label><input type="radio" name="q8" value="Criatividade"> Busco solução criativa.</label>
+            <label><input type="radio" name="q8" value="Peço ajuda"> Peço ajuda ao time.</label>
+          </div>
+        </div>
+
+        <div class="qblock">
+          <h4>9) Reuniões em inglês</h4>
+<p>Você entra em uma call internacional em inglês e não entende tudo. O que faz?</p>
+          <div class="choices">
+            <label><input type="radio" name="q9" value="Anoto e reviso" required> Anoto e reviso depois.</label>
+            <label><input type="radio" name="q9" value="Peço para repetir"> Peço para repetirem.</label>
+            <label><input type="radio" name="q9" value="Confirmo no chat"> Confirmo no chat.</label>
+            <label><input type="radio" name="q9" value="Capto o essencial"> Capto o essencial e sigo.</label>
+          </div>
+        </div>
+
+        <div class="qblock">
+          <h4>10) Reflexão pessoal</h4>
+          <p>Quando você imaginar olhar para trás daqui a 1 ano de estágio na Caracol, o que gostaria de contar que viveu?</p>
+          <div class="field">
+            <textarea id="q10" name="q10" rows="4" placeholder="Resposta aberta"></textarea>
+          </div>
+        </div>
+        </div>
+
+        <div class="wizard-nav">
+          <button type="button" class="btn btn-secondary prev">Voltar</button>
+          <button type="submit" class="btn btn-primary submit">Enviar</button>
+        </div>
+      </fieldset>
+
+      <!-- ========== THANK YOU ========== -->
+      <div id="thankyou" class="thankyou hidden" role="status" aria-live="polite">
+        <div class="ty-card">
+          <i class="fa-solid fa-circle-check"></i>
+          <h3>Obrigado por se inscrever! 🎉</h3>
+          <p>Agradecemos por ter chegado até aqui. Agora é com a gente. Vamos revisar suas respostas e retornaremos o contato.</p>
+          <a href="#topo" class="btn btn-secondary">Voltar ao início</a>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<!-- ===== JS (inline) será colado mais abaixo ===== -->
+
+
+
+
+    <!-- Footer -->
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-col brand-col">
+      <img src="../images/logo2.png" alt="Caracol Media" style="width: 100%; max-width: 240px; height: auto;"> 
+    </div>
+    
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <ul>
+        <li><a href="#growth">Growth Marketing</a></li>
+        <li><a href="#job">Job Advertising</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#diferenciais">Diferenciais</a></li>
+        <li><a href="#cases">Cases de Sucesso</a></li>
+        <li><a href="#processo">Metodologia</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="mailto:faleconosco@caracolmedia.com">faleconosco@caracolmedia.com</a></li>
+        <li>
+          <a href="https://wa.me/5511963421491?text=Olá%2C%20gostaria%20de%20mais%20informações!" target="_blank" style="color: inherit; text-decoration: none;">
+            +55 (11) 96342-1491
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Parcerias</h4>
+      <ul>
+        <li><a href="publisher/html_2.html">Cadastre-se como Publisher</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Caracol Media. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
+<script>
+function randomFloat(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function animateCard(card) {
+  const x = randomFloat(-30, 30); // pixels para esquerda/direita
+  const y = randomFloat(-30, 30); // pixels para cima/baixo
+  card.style.transition = "transform 1.5s cubic-bezier(.4,2,.6,1)";
+  card.style.transform = `translate(${x}px, ${y}px)`;
+  setTimeout(() => animateCard(card), randomFloat(1200, 2200)); // tempo aleatório
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const card1 = document.querySelector('.card-1');
+  const card2 = document.querySelector('.card-2');
+  if (card1) animateCard(card1);
+  if (card2) animateCard(card2);
+});
+</script>
+<script>
+(function(){
+  // ========== NAVEGAÇÃO PRINCIPAL DO FORMULÁRIO ========== 
+  const form = document.getElementById('caracolForm');
+  const steps = Array.from(document.querySelectorAll('.form-step'));
+  const dots = Array.from(document.querySelectorAll('.wizard-steps .dot'));
+  const progressFill = document.getElementById('wizardProgressFill');
+  const maxStep = steps.length;
+  let current = 0; // index do step
+
+  // Navegação
+  function updateStep(idx){
+    steps.forEach((s, i) => s.classList.toggle('current', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i <= idx));
+    const pct = Math.max(10, Math.round(((idx + 1) / maxStep) * 100));
+    progressFill.style.width = pct + '%';
+    current = idx;
+    // scroll suave para o topo do form
+    steps[idx].scrollIntoView({behavior: 'smooth', block: 'start'});
+    
+    // Se chegou no step 5, inicializa o carousel
+    if (idx === 4) { // step 5 = índice 4
+      console.log('📋 Chegou no Step 5 - Questionário');
+      setTimeout(() => ensureCarousel(), 200);
+    }
+  }
+
+  function next(){
+    if (!validateStep(current)) return;
+    if (current < maxStep - 1) updateStep(current + 1);
+  }
+
+  function prev(){
+    if (current > 0) updateStep(current - 1);
+  }
+
+  // Validação simples do step atual
+  function validateStep(idx){
+    const fieldset = steps[idx];
+    
+    // Step 5 tem validação especial (será tratada no submit)
+    if (fieldset.dataset.step === '5') {
+      return true; // deixa a validação específica do step 5 cuidar disso
+    }
+    
+    const required = Array.from(fieldset.querySelectorAll('[required]'));
+    let ok = true;
+    let missingFields = [];
+    
+    required.forEach(el => {
+      if (el.type === 'radio'){
+        const group = fieldset.querySelectorAll(`input[name="${el.name}"]`);
+        const anyChecked = Array.from(group).some(r => r.checked);
+        if (!anyChecked){ 
+          ok = false; 
+          markInvalid(group[0]);
+          const label = fieldset.querySelector(`label[for="${el.name}"]`) || 
+                       group[0].closest('.field')?.querySelector('label');
+          if (label) missingFields.push(label.textContent.replace('*', '').trim());
+        }
+      } else if (el.type === 'file'){
+        if (!el.files || !el.files[0]){ 
+          ok = false; 
+          markInvalid(el);
+          const label = fieldset.querySelector(`label[for="${el.id}"]`);
+          if (label) missingFields.push(label.textContent.replace('*', '').trim());
+        }
+      } else {
+        if (!el.value.trim()){ 
+          ok = false; 
+          markInvalid(el);
+          const label = fieldset.querySelector(`label[for="${el.id}"]`);
+          if (label) missingFields.push(label.textContent.replace('*', '').trim());
+        }
+      }
+    });
+    
+    // Mostra erro específico se houver campos faltando
+    if (!ok && missingFields.length > 0) {
+      showStepError(fieldset, missingFields);
+    }
+    
+    return ok;
+  }
+
+  function markInvalid(el){
+    el.focus();
+    el.closest('.field')?.classList.add('invalid');
+    setTimeout(() => el.closest('.field')?.classList.remove('invalid'), 1200);
+  }
+
+  function showStepError(fieldset, missingFields) {
+    // Remove erro anterior
+    const oldError = fieldset.querySelector('.form-error');
+    if (oldError) oldError.remove();
+    
+    // Cria nova mensagem de erro
+    const errorBox = document.createElement('div');
+    errorBox.className = 'form-error';
+    errorBox.innerHTML = `
+      <strong>⚠️ Ops! Você precisa preencher:</strong>
+      <ul>${missingFields.map(field => `<li>${field}</li>`).join('')}</ul>
+    `;
+    fieldset.insertBefore(errorBox, fieldset.firstChild);
+    
+    // Remove erro após 5 segundos
+    setTimeout(() => {
+      if (errorBox.parentNode) errorBox.remove();
+    }, 5000);
+  }
+
+  // Botões de navegação
+  document.querySelectorAll('.next').forEach(b => b.addEventListener('click', next));
+  document.querySelectorAll('.prev').forEach(b => b.addEventListener('click', prev));
+
+  // Submit do formulário
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validateStep(current)) return;
+    
+    // Mostrar página de obrigado
+    form.querySelectorAll('.form-step').forEach(s => s.classList.remove('current'));
+    document.getElementById('thankyou').classList.remove('hidden');
+    progressFill.style.width = '100%';
+    dots.forEach(d => d.classList.add('active'));
+  });
+
+  // ========== CAROUSEL DO STEP 5 ========== 
+  function initQuestionCarousel(){
+    const step5 = form?.querySelector('fieldset[data-step="5"]');
+    console.log('🎯 Tentando encontrar Step 5:', step5 ? 'Encontrado!' : 'Não encontrado');
+    if(!step5) return;
+
+    const blocks = Array.from(step5.querySelectorAll('.qblock'));
+    console.log('🔍 Encontradas', blocks.length, 'perguntas:', blocks.map(b => b.querySelector('h4')?.textContent));
+    
+    // Debug: verificar estilos aplicados
+    blocks.forEach((block, i) => {
+      const styles = window.getComputedStyle(block);
+      console.log(`Pergunta ${i + 1}:`, {
+        display: styles.display,
+        opacity: styles.opacity,
+        visibility: styles.visibility,
+        position: styles.position
+      });
+    });
+    
+    if (!blocks.length) return;
+
+    let currentIndex = 0;
+    let isTransitioning = false;
+
+    // Função para mostrar uma pergunta específica (versão simplificada)
+    function showQuestion(index) {
+      if (index < 0 || index >= blocks.length) {
+        console.log('❌ Índice inválido:', index, 'Total:', blocks.length);
+        return;
+      }
+      
+      console.log('➡️ Mostrando pergunta:', index + 1, '/', blocks.length);
+      
+      // Remove active de todos os blocos e ativa apenas o selecionado
+      blocks.forEach((block, i) => {
+        const isActive = i === index;
+        block.classList.toggle('active', isActive);
+        
+        // Debug detalhado
+        if (isActive) {
+          const title = block.querySelector('h4')?.textContent || 'Sem título';
+          console.log('✅ Pergunta ativa:', title);
+        }
+        
+        // Controla os required dos inputs
+        const radios = block.querySelectorAll('input[type="radio"]');
+        const textarea = block.querySelector('textarea');
+        radios.forEach(r => r.toggleAttribute('required', isActive));
+        if (textarea) textarea.toggleAttribute('required', isActive);
+      });
+      
+      currentIndex = index;
+      updateCarouselIndicator();
+    }
+
+    // Função para atualizar indicador visual
+    function updateCarouselIndicator() {
+      const container = step5.querySelector('.carousel-container');
+      let indicator = container.querySelector('.carousel-indicator');
+      
+      if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.className = 'carousel-indicator';
+        indicator.style.cssText = `
+          position: absolute;
+          top: -10px;
+          right: 0;
+          background: rgba(255, 224, 27, 0.2);
+          color: #fff;
+          padding: 4px 8px;
+          border-radius: 12px;
+          font-size: 0.8rem;
+          font-weight: 600;
+        `;
+        container.appendChild(indicator);
+      }
+      
+      indicator.textContent = `${currentIndex + 1}/${blocks.length}`;
+    }
+
+    // Função para ir para a próxima pergunta
+    function nextQuestion() {
+      if (currentIndex < blocks.length - 1) {
+        showQuestion(currentIndex + 1);
+      }
+    }
+
+    // Função para voltar pergunta
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        showQuestion(currentIndex - 1);
+      }
+    }
+
+    // Inicializa mostrando a primeira pergunta
+    showQuestion(0);
+
+    // Event listener para detectar seleção de rádios
+    step5.addEventListener('change', function(e) {
+      if (e.target.type === 'radio') {
+        console.log('Opção selecionada:', e.target.name, '=', e.target.value);
+        
+        // Remove erro se existir
+        const errorBox = step5.querySelector('.form-error');
+        if (errorBox) errorBox.remove();
+        
+        // Aguarda um pouco e vai para a próxima pergunta
+        setTimeout(() => {
+          nextQuestion();
+        }, 800);
+      }
+    });
+
+    // Navegação por teclado
+    step5.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevQuestion();
+      }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        const currentBlock = blocks[currentIndex];
+        const hasAnswer = currentBlock.querySelector('input[type="radio"]:checked') || 
+                         (currentBlock.querySelector('textarea')?.value.trim());
+        if (hasAnswer) {
+          nextQuestion();
+        }
+      }
+    });
+
+    return { showQuestion, nextQuestion, prevQuestion, getCurrentIndex: () => currentIndex };
+  }
+
+  // Inicializar carousel quando chegar no step 5
+  let qCarousel = null;
+  function ensureCarousel(){
+    if (!qCarousel) {
+      console.log('🎯 Inicializando carousel do Step 5...');
+      qCarousel = initQuestionCarousel();
+      console.log('✅ Carousel inicializado:', qCarousel ? 'Sucesso' : 'Erro');
+    }
+  }
+
+  // Monitorar mudanças de step para inicializar carousel
+  const observer = new MutationObserver(() => {
+    const step5Current = document.querySelector('fieldset[data-step="5"].current');
+    if (step5Current && !qCarousel) {
+      console.log('🔄 Step 5 detectado, inicializando carousel...');
+      setTimeout(() => ensureCarousel(), 100); // pequeno delay para garantir renderização
+    }
+  });
+  
+  observer.observe(form, { 
+    attributes: true, 
+    subtree: true, 
+    attributeFilter: ['class'] 
+  });
+
+  // ========== VALIDAÇÃO ESPECÍFICA DO STEP 5 ========== 
+  form.addEventListener('submit', (e) => {
+    const currentStep = form.querySelector('.form-step.current');
+    
+    // Só valida se estivermos no step 5
+    if (currentStep && currentStep.dataset.step === '5') {
+      const step5 = currentStep;
+      const missing = [];
+      const questionTitles = [];
+      
+      // Mapear títulos das perguntas para feedback mais claro
+      const questionMap = {
+        1: "Campanha global",
+        2: "Dados brutos", 
+        3: "Cliente exigente",
+        4: "Ritmo Caracol",
+        5: "Conteúdo sem briefing",
+        6: "Aprendizado rápido",
+        7: "Erro descoberto",
+        8: "Prazo apertado",
+        9: "Reuniões em inglês",
+        10: "Reflexão pessoal"
+      };
+      
+      // Verifica todas as perguntas de 1 a 9 (rádios)
+      for(let k = 1; k <= 9; k++){
+        const name = `q${k}`;
+        const checked = step5.querySelector(`input[name="${name}"]:checked`);
+        if (!checked) {
+          missing.push(k);
+          questionTitles.push(`${k}) ${questionMap[k]}`);
+        }
+      }
+      
+      // Verifica pergunta 10 (textarea)
+      const q10 = step5.querySelector('#q10');
+      if (q10 && !q10.value.trim()) {
+        missing.push(10);
+        questionTitles.push(`10) ${questionMap[10]}`);
+      }
+
+      if (missing.length > 0) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Remove erro anterior se existir
+        const oldError = step5.querySelector('.form-error');
+        if (oldError) {
+          oldError.remove();
+        }
+        
+        // Cria nova mensagem de erro mais detalhada
+        const errorBox = document.createElement('div');
+        errorBox.className = 'form-error';
+        errorBox.innerHTML = `
+          <strong>⚠️ Faltam ${missing.length} pergunta${missing.length > 1 ? 's' : ''}:</strong>
+          <ul>${questionTitles.map(title => `<li>${title}</li>`).join('')}</ul>
+          <p><small>💡 Dica: Use as setas ← → do teclado para navegar rapidamente entre as perguntas.</small></p>
+          <div style="margin-top: 0.75rem;">
+            <button type="button" class="btn btn-secondary" onclick="this.closest('.form-error').remove()" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+              Entendi, vou completar
+            </button>
+          </div>
+        `;
+        step5.insertBefore(errorBox, step5.firstChild);
+        
+        // Volta para a primeira pergunta não respondida
+        const firstMissingIndex = missing[0] - 1;
+        if (qCarousel && firstMissingIndex >= 0) {
+          setTimeout(() => {
+            qCarousel.showQuestion(firstMissingIndex);
+          }, 100);
+        }
+        
+        // Scroll para o erro
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        console.log('Perguntas não respondidas:', missing);
+        return false;
+      } else {
+        // Remove mensagem de erro se tudo estiver preenchido
+        const errorBox = step5.querySelector('.form-error');
+        if (errorBox) {
+          errorBox.remove();
+        }
+        
+        // Feedback positivo antes do envio
+        console.log('✅ Todas as perguntas respondidas! Enviando formulário...');
+      }
+    }
+  });
+
+  // Inicia no primeiro step
+  updateStep(0);
+
+  // Inicializa o carousel imediatamente
+  ensureCarousel();
+})();
+</script>
+
+
+</body>
+</html>
