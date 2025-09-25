@@ -2227,6 +2227,7 @@ footer ul li a:hover {
       radial-gradient(circle at 50% 50%, #1a1a1a 60%, #0d0d0d 100%);
     z-index: 0;
     overflow: hidden;
+     min-height: 90vh;
 }
 
 .hero-estagio .hero-background2 {
@@ -2869,4 +2870,87 @@ footer ul li a:hover {
 .sobre-texto2 > .core-badge.core-badge-orange {
   justify-self: center;       /* centraliza horizontalmente o próprio badge */
   width: fit-content;         /* garante que ele encolha ao conteúdo */
+}
+
+/* ======= O QUE OFERECEMOS ======= */
+.oferecemos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+}
+
+.oferecemos-card {
+  background: var(--medium-gray);
+  border: 1px solid #d4d83d; /* amarelo neon suave já usado no site */
+  border-radius: 14px;
+  padding: 1.25rem 1.2rem;
+  text-align: left;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.oferecemos-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-orange);
+  box-shadow: 0 12px 26px rgba(255,139,0,0.15);
+}
+
+.oferecemos-card i {
+  font-size: 1.4rem;
+  background: linear-gradient(45deg, var(--primary-orange), var(--accent-yellow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.oferecemos-card h3 {
+  color: #fff;
+  margin: 0.75rem 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.oferecemos-card p {
+  color: var(--text-gray);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+/* ======= O QUE ESPERAMOS ======= */
+.esperamos-lista {
+  list-style: none;
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: 1fr;
+}
+
+.esperamos-lista li {
+  background: var(--medium-gray);
+  border: 1px solid #d4d83d;
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  color: #fff;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.esperamos-lista li i {
+  color: var(--secondary-lime);
+  margin-top: 2px;
+}
+
+/* ======= PROCESSO SELETIVO – ajustes visuais ======= */
+.processo .section-header .subtitle {
+  color: var(--text-gray);
+}
+
+.processo-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .esperamos-lista { padding: 0 0.25rem; }
 }
