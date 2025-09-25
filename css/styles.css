@@ -2820,3 +2820,53 @@ footer ul li a:hover {
   margin-top: 2rem; /* opcional */
   margin-bottom: 5rem; /* opcional */
 }
+
+.sobre-texto > div {
+  text-align: center !important;
+}
+
+.core-badge2 {
+  display: inline-block;
+}
+
+.core-badge2.core-badge-orange2 {
+    background: #ff8b00;
+    color: #000;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+    padding: 0.3rem 1.2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    text-align: center;
+    width: auto;           /* <-- troque de max-width: fit-content para width: auto */
+}
+
+.sobre-texto > div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center !important;
+}
+
+.sobre-texto2 {
+  text-align: center;
+}
+
+.sobre-texto2 .core-badge.core-badge-orange {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.sobre-texto2 { 
+  display: grid;              /* vira um grid só para usar justify-self */
+}
+.sobre-texto2 > .core-badge.core-badge-orange {
+  justify-self: center;       /* centraliza horizontalmente o próprio badge */
+  width: fit-content;         /* garante que ele encolha ao conteúdo */
+}
