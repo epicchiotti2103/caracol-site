@@ -2812,3 +2812,11 @@ footer ul li a:hover {
   animation: none !important;
   transform: none !important;
 }
+
+.hero-ctas2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem; /* opcional */
+  margin-bottom: 5rem; /* opcional */
+}
