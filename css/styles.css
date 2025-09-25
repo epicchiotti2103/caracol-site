@@ -2954,3 +2954,414 @@ footer ul li a:hover {
 @media (max-width: 768px) {
   .esperamos-lista { padding: 0 0.25rem; }
 }
+
+/* ===== Formulário multi-etapas ===== */
+.formulario { background: var(--base-black); }
+.formulario .section-header .subtitle { color: var(--text-gray); }
+
+.wizard-progress { margin-bottom: 1.25rem; }
+.wizard-progress-bar { width: 100%; height: 8px; background: var(--medium-gray); border-radius: 999px; overflow: hidden; }
+.wizard-progress-bar span { display:block; height:100%; background: linear-gradient(90deg, var(--accent-yellow), var(--primary-orange)); transition: width .25s ease; }
+
+.wizard-steps { display:flex; gap:.5rem; margin-top:.6rem; }
+.wizard-steps .dot {
+  width:26px; height:26px; border-radius:50%;
+  display:grid; place-items:center; font-size:.8rem; color:#000;
+  background:#6b7280; /* neutral */
+}
+.wizard-steps .dot.active { background: var(--accent-yellow); }
+
+.form-step { display:none; background: var(--medium-gray); border:1px solid #2e2e2e; border-radius:16px; padding:1.25rem; }
+.form-step.current { display:block; animation: stepIn .25s ease; }
+@keyframes stepIn { from {opacity:0; transform:translateY(6px)} to {opacity:1; transform:none} }
+
+legend { font-size:1.2rem; font-weight:800; margin-bottom:.75rem; color:#fff; }
+.field { margin-bottom: .9rem; }
+.field label { display:block; font-weight:700; color:#fff; margin-bottom:.35rem; }
+.req { color: var(--accent-yellow); }
+.hint { color: var(--text-gray); font-size:.85rem; }
+
+input[type="text"], input[type="email"], input[type="url"], input[type="file"], textarea {
+  width:100%; background:#111; color:#fff; border:1px solid #3a3a3a;
+  border-radius:10px; padding:.8rem .9rem; outline:none;
+}
+input:focus, textarea:focus { border-color: var(--accent-yellow); box-shadow: 0 0 0 3px rgba(255,224,27,.15); }
+textarea { resize: vertical; }
+
+.grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 860px){ .grid-2 { grid-template-columns: 1fr; } }
+
+.choices { display:grid; gap:.5rem; }
+.choices-columns { grid-template-columns: repeat(4, minmax(120px,1fr)); }
+@media (max-width: 860px){ .choices-columns { grid-template-columns: repeat(2,1fr); } }
+.choices-grid { grid-template-columns: repeat(2, minmax(220px,1fr)); gap:.65rem 1rem; }
+.choices-grid .span-2 { grid-column: span 2; display:grid; gap:.4rem; }
+.choices label { display:flex; gap:.5rem; align-items:center; color:#e5e7eb; }
+
+.choices-cards { display:grid; grid-template-columns: repeat(3, minmax(180px,1fr)); gap:1rem; }
+@media (max-width: 860px){ .choices-cards { grid-template-columns: 1fr; } }
+
+.card-choice input { display:none; }
+.card-choice .card {
+  background:#111; border:1px solid #3a3a3a; border-radius:14px; padding:1rem;
+  display:grid; place-items:center; gap:.4rem; text-align:center; color:#fff;
+  transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.card-choice .card i { font-size:1.4rem; }
+.card-choice input:checked + .card { border-color: var(--accent-yellow); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,224,27,.12); }
+
+/* Container fixo para o carousel */
+fieldset[data-step="5"] .carousel-container {
+  position: relative;
+  min-height: 320px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+/* Regras específicas do step 5 para qblocks */
+fieldset[data-step="5"] .qblock { 
+  background: #111; 
+  border: 1px solid #2e2e2e; 
+  border-radius: 12px; 
+  padding: 1.25rem; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(30px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+fieldset[data-step="5"] .qblock.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  position: relative;
+  z-index: 2;
+}
+
+/* Animações de entrada e saída */
+fieldset[data-step="5"] .qblock.entering {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+fieldset[data-step="5"] .qblock.exiting {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+/* Indicador do carousel */
+.carousel-indicator {
+  position: absolute !important;
+  top: -35px !important;
+  right: 0 !important;
+  background: linear-gradient(135deg, rgba(255, 224, 27, 0.2) 0%, rgba(255, 224, 27, 0.1) 100%) !important;
+  border: 1px solid rgba(255, 224, 27, 0.3) !important;
+  color: var(--accent-yellow) !important;
+  padding: 6px 12px !important;
+  border-radius: 16px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  backdrop-filter: blur(4px) !important;
+  transition: all 0.3s ease !important;
+}
+
+.carousel-indicator:hover {
+  background: linear-gradient(135deg, rgba(255, 224, 27, 0.3) 0%, rgba(255, 224, 27, 0.2) 100%) !important;
+  transform: translateY(-1px) !important;
+}
+
+fieldset[data-step="5"] .qblock h4 { 
+  margin: 0 0 0.5rem 0; 
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+fieldset[data-step="5"] .qblock p { 
+  margin: 0 0 0.8rem 0; 
+  color: #d1d5db;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Estilos para as opções */
+fieldset[data-step="5"] .qblock .choices {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.8rem;
+  align-items: start;
+}
+
+fieldset[data-step="5"] .qblock .choices label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+fieldset[data-step="5"] .qblock .choices label:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+fieldset[data-step="5"] .qblock input[type="radio"] {
+  margin: 0;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  fieldset[data-step="5"] .qblock .choices {
+    grid-template-columns: 1fr;
+  }
+  
+  fieldset[data-step="5"] .qblock {
+    padding: 1rem;
+  }
+}
+
+.wizard-nav { display:flex; justify-content:space-between; gap:.6rem; margin-top:.4rem; }
+.btn { border-radius: 12px; padding:.85rem 1rem; font-weight:800; }
+.btn-primary { background: linear-gradient(90deg, var(--primary-orange), var(--accent-yellow)); color:#000; }
+.btn-secondary { background:#222; color:#fff; border:1px solid #3a3a3a; }
+
+.thankyou.hidden { display:none; }
+.ty-card {
+  background: var(--medium-gray); border:1px solid #2e2e2e; border-radius:18px; padding:2rem;
+  display:grid; place-items:center; text-align:center; gap:.6rem; margin-top:1rem;
+}
+.ty-card i { font-size:2.2rem; color: var(--secondary-lime); }
+
+/* ===== Fix alinhamento – bloco de Idiomas ===== */
+.choices-columns{
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem 2rem;                /* espaçamento consistente */
+  align-items: center;
+  justify-items: start;
+}
+
+@media (max-width: 1024px){
+  .choices-columns{ grid-template-columns: repeat(2, 1fr); }
+}
+
+.choices-columns label{
+  /* cada opção vira um mini-grid: [radio][texto] */
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  align-items: center;
+  gap: .55rem;
+  width: 100%;
+  min-width: 0;                  /* permite o texto quebrar dentro da célula */
+  white-space: nowrap;           /* mantém curto; remova se quiser quebrar linha */
+}
+
+.choices-columns input[type="radio"]{
+  margin: 0;                     /* elimina offsets padrão */
+  transform: translateY(1px);    /* ajusta baseline do dot com o texto */
+}
+
+.form-step{ overflow: hidden; }  /* garante que nada “vaze” da borda arredondada */
+
+/* ===== Fix alinhamento – STEP 3 (Experiências & Habilidades) ===== */
+
+/* grade estável: 2 colunas no desktop, 1 no mobile */
+.choices-grid{
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: .75rem 1.25rem;
+  align-items: start;
+}
+
+/* checkbox + texto alinhados em mini-grid */
+.choices-grid label{
+  display: grid;
+  grid-template-columns: 20px 1fr;   /* [checkbox][texto] */
+  align-items: center;
+  gap: .55rem;
+  width: 100%;
+  min-width: 0;                      /* evita overflow do texto */
+  white-space: normal;               /* permite quebra de linha quando necessário */
+}
+
+/* corrige “offset” vertical do checkbox */
+.choices-grid input[type="checkbox"]{
+  margin: 0;
+  transform: translateY(1px);
+}
+
+/* “Outros” ocupa a linha toda e alinha título + input */
+.choices-grid label.span-2{
+  grid-column: 1 / -1;               /* pega as duas colunas */
+  display: grid;
+  grid-template-columns: 120px 1fr;   /* [título][campo] */
+  align-items: center;
+  gap: .5rem .75rem;
+}
+
+/* deixa o input de “Outros” elástico */
+.choices-grid label.span-2 input[type="text"]{
+  min-width: 0;
+}
+
+/* responsivo: 1 coluna no mobile e “Outros” empilha título acima do campo */
+@media (max-width: 860px){
+  .choices-grid{ grid-template-columns: 1fr; }
+  .choices-grid label.span-2{ grid-template-columns: 1fr; }
+}
+
+/* garante que nada “vaze” do card com borda arredondada */
+fieldset[data-step="3"].form-step{ overflow: hidden; }
+
+/* ===== Step 5 — Questionário: alinhamento ===== */
+fieldset[data-step="5"] .qblock .choices{
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: .6rem 1rem;
+  align-items: center;
+}
+@media (max-width: 860px){
+  fieldset[data-step="5"] .qblock .choices{
+    grid-template-columns: 1fr;
+  }
+}
+fieldset[data-step="5"] .qblock .choices label{
+  display: grid;
+  grid-template-columns: 20px 1fr;  /* [radio][texto] */
+  align-items: center;
+  gap: .55rem;
+  width: 100%;
+  min-width: 0;
+  white-space: normal;
+}
+fieldset[data-step="5"] .qblock input[type="radio"]{
+  margin: 0;
+  transform: translateY(1px);
+}
+
+/* Regras específicas removidas - agora estão no fieldset[data-step="5"] acima */
+
+fieldset[data-step="5"] .qblock .choices{
+  display:grid!important;
+  grid-template-columns: repeat(2, minmax(220px,1fr));
+  gap:.6rem 1rem;
+  align-items:center;
+}
+@media (max-width: 860px){
+  fieldset[data-step="5"] .qblock .choices{ grid-template-columns:1fr; }
+}
+fieldset[data-step="5"] .qblock .choices label{
+  display:grid;
+  grid-template-columns:20px 1fr; /* [radio][texto] */
+  align-items:center;
+  gap:.55rem;
+  min-width:0;
+}
+fieldset[data-step="5"] .qblock input[type="radio"]{ margin:0; transform:translateY(1px); }
+
+/* Regras movidas para fieldset[data-step="5"] */
+
+/* bala de erro em step */
+.form-error{
+  background: linear-gradient(135deg, #2a0e0e 0%, #1a0808 100%);
+  border: 1px solid #ff6b6b; 
+  color: #ffdede;
+  border-radius: 12px; 
+  padding: 1rem 1.25rem; 
+  margin: 1rem 0 0 0;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.15);
+  position: relative;
+  animation: errorSlideIn 0.3s ease-out;
+}
+
+@keyframes errorSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.form-error ul{ margin:.4rem 0 0 1rem; padding:0; }
+
+/* Regras consolidadas */
+
+/* Regras movidas para o início do step 5 */
+
+/* grade e alinhamento dos rádios (mantém o que já corrigimos) */
+fieldset[data-step="5"] .qblock .choices{
+  display:grid!important;
+  grid-template-columns: repeat(2, minmax(220px,1fr));
+  gap:.6rem 1rem;
+  align-items:center;
+}
+@media (max-width: 860px){
+  fieldset[data-step="5"] .qblock .choices{ grid-template-columns:1fr; }
+}
+fieldset[data-step="5"] .qblock .choices label{
+  display:grid; grid-template-columns:20px 1fr; align-items:center; gap:.55rem; min-width:0;
+}
+fieldset[data-step="5"] .qblock input[type="radio"]{ margin:0; transform:translateY(1px); }
+
+/* Mensagem de erro bem visível */
+.form-error {
+  background: #2a0e0e; 
+  border: 2px solid #ff6b6b; 
+  color: #ffdede;
+  border-radius: 12px; 
+  padding: 1rem 1.25rem; 
+  margin: 0 0 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.15);
+}
+
+.form-error strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.form-error ul { 
+  margin: 0.5rem 0 0.5rem 1.25rem; 
+  padding: 0; 
+  list-style-type: disc;
+}
+
+.form-error li {
+  margin-bottom: 0.25rem;
+}
+
+.form-error small {
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* opcional: botões "Pergunta anterior/próxima" internos (se habilitar no JS) */
+.qnav {
+  display:flex; justify-content:space-between; margin-top:.6rem; gap:.6rem;
+}
+
+/* Garante que o step 5 tenha altura mínima e seja grid quando ativo */
+fieldset[data-step="5"].form-step.current {
+  display: grid;
+  align-content: start;
+  min-height: 420px;
+}
+
+/* Regras consolidadas no início */
+
+/* Regras consolidadas acima */
+
+/* Regras já consolidadas */
