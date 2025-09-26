@@ -848,5 +848,112 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
+
+<script>
+(function(){
+  const API_URL = "https://api.caracol.media/api/form";
+
+  const form = document.getElementById('caracolForm');
+  const steps = Array.from(document.querySelectorAll('.form-step'));
+  const dots = Array.from(document.querySelectorAll('.wizard-steps .dot'));
+  const progressFill = document.getElementById('wizardProgressFill');
+  const btnSubmit = form.querySelector('button[type="submit"]');
+  const maxStep = steps.length;
+  let current = 0;
+
+  function updateStep(idx){
+    steps.forEach((s, i) => s.classList.toggle('current', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i <= idx));
+    const pct = Math.max(10, Math.round(((idx + 1) / maxStep) * 100));
+    progressFill.style.width = pct + '%';
+    current = idx;
+    steps[idx].scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+
+  function validateStep(idx){
+    const fieldset = steps[idx];
+    const required = Array.from(fieldset.querySelectorAll('[required]'));
+    let ok = true;
+    required.forEach(el => {
+      if (el.type === 'radio'){
+        const group = fieldset.querySelectorAll(`input[name="${el.name}"]`);
+        if (![...group].some(r => r.checked)) ok = false;
+      } else if (el.type === 'file'){
+        if (!el.files || !el.files[0]) ok = false;
+      } else {
+        if (!el.value.trim()) ok = false;
+      }
+    });
+    return ok;
+  }
+
+  // navegação
+  document.querySelectorAll('.next').forEach(b => b.addEventListener('click', () => {
+    if (!validateStep(current)) return;
+    if (current < maxStep - 1) updateStep(current + 1);
+  }));
+  document.querySelectorAll('.prev').forEach(b => b.addEventListener('click', () => {
+    if (current > 0) updateStep(current - 1);
+  }));
+
+  // gerar uma chave de idempotência para evitar duplicatas
+  function uuid(){
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validateStep(current)) return;
+
+    // evita duplo clique
+    btnSubmit.disabled = true;
+    const originalText = btnSubmit.textContent;
+    btnSubmit.textContent = 'Enviando...';
+
+    const formData = new FormData(form);
+
+    try {
+      const resp = await fetch(API_URL, {
+        method: "POST",
+        body: formData,
+        headers: { "X-Idempotency-Key": uuid() } // o backend pode usar isso
+      });
+
+      // tenta ler JSON mesmo em erro
+      let payload = null;
+      const ct = resp.headers.get('content-type') || '';
+      if (ct.includes('application/json')) {
+        try { payload = await resp.json(); } catch {}
+      }
+
+      if (!resp.ok) {
+        const msg = (payload && (payload.error || payload.message)) ||
+                    `Erro ${resp.status} ao enviar.`;
+        alert(`❌ ${msg}`);
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = originalText;
+        return;
+      }
+
+      // sucesso → mostra “obrigado”
+      form.querySelectorAll('.form-step').forEach(s => s.classList.remove('current'));
+      document.getElementById('thankyou').classList.remove('hidden');
+      progressFill.style.width = '100%';
+      dots.forEach(d => d.classList.add('active'));
+    } catch (err) {
+      // só cai aqui em falha de rede/CORS
+      alert("❌ Falha de rede (CORS ou conexão). Tente novamente.");
+      console.error(err);
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = originalText;
+    }
+  });
+
+  updateStep(0);
+})();
+</script>
+
 </body>
 </html>
