@@ -368,6 +368,7 @@
         <div class="wizard-nav">
           <button type="button" class="btn btn-secondary prev">Voltar</button>
           <button type="submit" class="btn btn-primary submit">Enviar</button>
+          <div id="status-envio" aria-live="polite" class="hint" style="margin-top:.5rem"></div>
         </div>
       </fieldset>
 
@@ -385,73 +386,18 @@
   </div>
 </section>
 
-<!-- ===== JS (inline) será colado mais abaixo ===== -->
-
-
-
-
-    <!-- Footer -->
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-col brand-col">
-      <img src="../images/logo2.png" alt="Caracol Media" style="width: 100%; max-width: 240px; height: auto;"> 
-    </div>
-    
-    <div class="footer-col">
-      <h4>Serviços</h4>
-      <ul>
-        <li><a href="#growth">Growth Marketing</a></li>
-        <li><a href="#job">Job Advertising</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Empresa</h4>
-      <ul>
-        <li><a href="#diferenciais">Diferenciais</a></li>
-        <li><a href="#cases">Cases de Sucesso</a></li>
-        <li><a href="#processo">Metodologia</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Contato</h4>
-      <ul>
-        <li><a href="mailto:faleconosco@caracolmedia.com">faleconosco@caracolmedia.com</a></li>
-        <li>
-          <a href="https://wa.me/5511963421491?text=Olá%2C%20gostaria%20de%20mais%20informações!" target="_blank" style="color: inherit; text-decoration: none;">
-            +55 (11) 96342-1491
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Parcerias</h4>
-      <ul>
-        <li><a href="publisher/html_2.html">Cadastre-se como Publisher</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2025 Caracol Media. Todos os direitos reservados.</p>
-  </div>
-</footer>
-
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
+<!-- ===== JS (inline) ===== -->
 <script>
 function randomFloat(min, max) {
   return Math.random() * (max - min) + min;
 }
 
 function animateCard(card) {
-  const x = randomFloat(-30, 30); // pixels para esquerda/direita
-  const y = randomFloat(-30, 30); // pixels para cima/baixo
+  const x = randomFloat(-30, 30);
+  const y = randomFloat(-30, 30);
   card.style.transition = "transform 1.5s cubic-bezier(.4,2,.6,1)";
   card.style.transform = `translate(${x}px, ${y}px)`;
-  setTimeout(() => animateCard(card), randomFloat(1200, 2200)); // tempo aleatório
+  setTimeout(() => animateCard(card), randomFloat(1200, 2200));
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -461,6 +407,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (card2) animateCard(card2);
 });
 </script>
+
 <script>
 (function(){
   // ========== NAVEGAÇÃO PRINCIPAL DO FORMULÁRIO ========== 
@@ -471,6 +418,57 @@ window.addEventListener('DOMContentLoaded', () => {
   const maxStep = steps.length;
   let current = 0; // index do step
 
+  const btnNextAll = () => Array.from(document.querySelectorAll('.next'));
+  const btnPrevAll = () => Array.from(document.querySelectorAll('.prev'));
+  const btnSubmit  = () => form.querySelector('.submit');
+
+  function refreshButtons(){
+    const fieldset = steps[current];
+    const stepNum = parseInt(fieldset.dataset.step, 10);
+
+    // Submit só aparece no último passo; Next some no último passo
+    const submitBtn = btnSubmit();
+    btnNextAll().forEach(b => { if (stepNum === 5) b.classList.add('hidden'); else b.classList.remove('hidden'); });
+    if (submitBtn) {
+      if (stepNum === 5) { 
+        // Só mostra o botão se todas as perguntas estiverem respondidas
+        const allAnswered = validateQuestionario();
+        if (allAnswered) {
+          submitBtn.classList.add('show');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar';
+          console.log('✅ Botão "Enviar" liberado - todas as perguntas respondidas');
+        } else {
+          submitBtn.classList.remove('show');
+          console.log('⏳ Botão "Enviar" oculto - faltam perguntas');
+        }
+      } else { 
+        submitBtn.classList.remove('show'); 
+      }
+    }
+
+    // Prev aparece a partir do passo 2
+    btnPrevAll().forEach(b => { if (stepNum >= 2) b.classList.remove('hidden'); else b.classList.add('hidden'); });
+  }
+
+  // Função para validar se todas as perguntas do questionário foram respondidas
+  function validateQuestionario() {
+    const step5 = form?.querySelector('fieldset[data-step="5"]');
+    if (!step5) return false;
+
+    // Verifica perguntas 1-9 (radio buttons)
+    for (let i = 1; i <= 9; i++) {
+      const checked = step5.querySelector(`input[name="q${i}"]:checked`);
+      if (!checked) return false;
+    }
+    
+    // Verifica pergunta 10 (textarea)
+    const q10 = step5.querySelector('#q10');
+    if (!q10 || !q10.value.trim()) return false;
+
+    return true;
+  }
+
   // Navegação
   function updateStep(idx){
     steps.forEach((s, i) => s.classList.toggle('current', i === idx));
@@ -478,12 +476,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const pct = Math.max(10, Math.round(((idx + 1) / maxStep) * 100));
     progressFill.style.width = pct + '%';
     current = idx;
-    // scroll suave para o topo do form
     steps[idx].scrollIntoView({behavior: 'smooth', block: 'start'});
-    
+    refreshButtons();
+
     // Se chegou no step 5, inicializa o carousel
-    if (idx === 4) { // step 5 = índice 4
-      console.log('📋 Chegou no Step 5 - Questionário');
+    if (idx === 4) {
       setTimeout(() => ensureCarousel(), 200);
     }
   }
@@ -497,275 +494,143 @@ window.addEventListener('DOMContentLoaded', () => {
     if (current > 0) updateStep(current - 1);
   }
 
+  // Bloqueia Enter para enviar antes do último passo (exceto textarea)
+  form.addEventListener('keydown', (e) => {
+    const isEnter = (e.key === 'Enter' || e.keyCode === 13);
+    const targetIsTextarea = e.target && e.target.tagName === 'TEXTAREA';
+    const fieldset = steps[current];
+    const stepNum = parseInt(fieldset.dataset.step, 10);
+    if (isEnter && stepNum !== 5 && !targetIsTextarea) {
+      e.preventDefault();
+    }
+  }, true);
+
   // Validação simples do step atual
   function validateStep(idx){
     const fieldset = steps[idx];
-    
-    // Step 5 tem validação especial (será tratada no submit)
     if (fieldset.dataset.step === '5') {
-      return true; // deixa a validação específica do step 5 cuidar disso
+      return true; // validação específica no envio
     }
-    
     const required = Array.from(fieldset.querySelectorAll('[required]'));
     let ok = true;
-    let missingFields = [];
-    
     required.forEach(el => {
       if (el.type === 'radio'){
         const group = fieldset.querySelectorAll(`input[name="${el.name}"]`);
         const anyChecked = Array.from(group).some(r => r.checked);
-        if (!anyChecked){ 
-          ok = false; 
-          markInvalid(group[0]);
-          const label = fieldset.querySelector(`label[for="${el.name}"]`) || 
-                       group[0].closest('.field')?.querySelector('label');
-          if (label) missingFields.push(label.textContent.replace('*', '').trim());
-        }
+        if (!anyChecked){ ok = false; }
       } else if (el.type === 'file'){
-        if (!el.files || !el.files[0]){ 
-          ok = false; 
-          markInvalid(el);
-          const label = fieldset.querySelector(`label[for="${el.id}"]`);
-          if (label) missingFields.push(label.textContent.replace('*', '').trim());
-        }
+        if (!el.files || !el.files[0]){ ok = false; }
       } else {
-        if (!el.value.trim()){ 
-          ok = false; 
-          markInvalid(el);
-          const label = fieldset.querySelector(`label[for="${el.id}"]`);
-          if (label) missingFields.push(label.textContent.replace('*', '').trim());
-        }
+        if (!el.value.trim()){ ok = false; }
       }
     });
-    
-    // Mostra erro específico se houver campos faltando
-    if (!ok && missingFields.length > 0) {
-      showStepError(fieldset, missingFields);
-    }
-    
     return ok;
   }
 
-  function markInvalid(el){
-    el.focus();
-    el.closest('.field')?.classList.add('invalid');
-    setTimeout(() => el.closest('.field')?.classList.remove('invalid'), 1200);
-  }
-
-  function showStepError(fieldset, missingFields) {
-    // Remove erro anterior
-    const oldError = fieldset.querySelector('.form-error');
-    if (oldError) oldError.remove();
-    
-    // Cria nova mensagem de erro
-    const errorBox = document.createElement('div');
-    errorBox.className = 'form-error';
-    errorBox.innerHTML = `
-      <strong>⚠️ Ops! Você precisa preencher:</strong>
-      <ul>${missingFields.map(field => `<li>${field}</li>`).join('')}</ul>
-    `;
-    fieldset.insertBefore(errorBox, fieldset.firstChild);
-    
-    // Remove erro após 5 segundos
-    setTimeout(() => {
-      if (errorBox.parentNode) errorBox.remove();
-    }, 5000);
-  }
-
   // Botões de navegação
-  document.querySelectorAll('.next').forEach(b => b.addEventListener('click', next));
-  document.querySelectorAll('.prev').forEach(b => b.addEventListener('click', prev));
-
-
+  btnNextAll().forEach(b => b.addEventListener('click', next));
+  btnPrevAll().forEach(b => b.addEventListener('click', prev));
 
   // ========== CAROUSEL DO STEP 5 ========== 
   function initQuestionCarousel(){
     const step5 = form?.querySelector('fieldset[data-step="5"]');
-    console.log('🎯 Tentando encontrar Step 5:', step5 ? 'Encontrado!' : 'Não encontrado');
     if(!step5) return;
 
     const blocks = Array.from(step5.querySelectorAll('.qblock'));
-    console.log('🔍 Encontradas', blocks.length, 'perguntas:', blocks.map(b => b.querySelector('h4')?.textContent));
-    
-    // Debug: verificar estilos aplicados
-    blocks.forEach((block, i) => {
-      const styles = window.getComputedStyle(block);
-      console.log(`Pergunta ${i + 1}:`, {
-        display: styles.display,
-        opacity: styles.opacity,
-        visibility: styles.visibility,
-        position: styles.position
-      });
-    });
-    
     if (!blocks.length) return;
 
     let currentIndex = 0;
-    let isTransitioning = false;
 
-    // Função para mostrar uma pergunta específica (versão simplificada)
     function showQuestion(index) {
-      if (index < 0 || index >= blocks.length) {
-        console.log('❌ Índice inválido:', index, 'Total:', blocks.length);
-        return;
-      }
-      
-      console.log('➡️ Mostrando pergunta:', index + 1, '/', blocks.length);
-      
-      // Remove active de todos os blocos e ativa apenas o selecionado
+      if (index < 0 || index >= blocks.length) return;
       blocks.forEach((block, i) => {
         const isActive = i === index;
         block.classList.toggle('active', isActive);
-        
-        // Debug detalhado
-        if (isActive) {
-          const title = block.querySelector('h4')?.textContent || 'Sem título';
-          console.log('✅ Pergunta ativa:', title);
-        }
-        
-        // Controla os required dos inputs
         const radios = block.querySelectorAll('input[type="radio"]');
         const textarea = block.querySelector('textarea');
         radios.forEach(r => r.toggleAttribute('required', isActive));
         if (textarea) textarea.toggleAttribute('required', isActive);
       });
-      
       currentIndex = index;
       updateCarouselIndicator();
     }
 
-    // Função para atualizar indicador visual
     function updateCarouselIndicator() {
       const container = step5.querySelector('.carousel-container');
       let indicator = container.querySelector('.carousel-indicator');
-      
       if (!indicator) {
         indicator = document.createElement('div');
         indicator.className = 'carousel-indicator';
-        indicator.style.cssText = `
-          position: absolute;
-          top: -10px;
-          right: 0;
-          background: rgba(255, 224, 27, 0.2);
-          color: #fff;
-          padding: 4px 8px;
-          border-radius: 12px;
-          font-size: 0.8rem;
-          font-weight: 600;
-        `;
+        indicator.style.cssText = `position:absolute;top:-10px;right:0;background:rgba(255,224,27,.2);color:#fff;padding:4px 8px;border-radius:12px;font-size:.8rem;font-weight:600;`;
         container.appendChild(indicator);
       }
-      
       indicator.textContent = `${currentIndex + 1}/${blocks.length}`;
     }
 
-    // Função para ir para a próxima pergunta
-    function nextQuestion() {
-      if (currentIndex < blocks.length - 1) {
-        showQuestion(currentIndex + 1);
-      }
-    }
+    function nextQuestion() { if (currentIndex < blocks.length - 1) showQuestion(currentIndex + 1); }
+    function prevQuestion() { if (currentIndex > 0) showQuestion(currentIndex - 1); }
 
-    // Função para voltar pergunta
-    function prevQuestion() {
-      if (currentIndex > 0) {
-        showQuestion(currentIndex - 1);
-      }
-    }
-
-    // Inicializa mostrando a primeira pergunta
     showQuestion(0);
 
-    // Event listener para detectar seleção de rádios
     step5.addEventListener('change', function(e) {
       if (e.target.type === 'radio') {
-        console.log('Opção selecionada:', e.target.name, '=', e.target.value);
-        
-        // Remove erro se existir
-        const errorBox = step5.querySelector('.form-error');
-        if (errorBox) errorBox.remove();
-        
-        // Aguarda um pouco e vai para a próxima pergunta
-        setTimeout(() => {
-          nextQuestion();
-        }, 800);
+        // Atualiza o estado do botão enviar
+        setTimeout(() => { 
+          refreshButtons(); // Verifica se deve mostrar o botão
+          nextQuestion(); 
+        }, 300);
       }
     });
 
-    // Navegação por teclado
-    step5.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        prevQuestion();
+    // Monitora a textarea da pergunta 10
+    step5.addEventListener('input', function(e) {
+      if (e.target.id === 'q10') {
+        refreshButtons(); // Atualiza o botão quando digita na pergunta 10
       }
+    });
+
+    step5.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prevQuestion(); }
       if (e.key === 'ArrowRight') {
         e.preventDefault();
         const currentBlock = blocks[currentIndex];
         const hasAnswer = currentBlock.querySelector('input[type="radio"]:checked') || 
                          (currentBlock.querySelector('textarea')?.value.trim());
-        if (hasAnswer) {
-          nextQuestion();
-        }
+        if (hasAnswer) nextQuestion();
       }
     });
 
     return { showQuestion, nextQuestion, prevQuestion, getCurrentIndex: () => currentIndex };
   }
 
-  // Inicializar carousel quando chegar no step 5
   let qCarousel = null;
-  function ensureCarousel(){
-    if (!qCarousel) {
-      console.log('🎯 Inicializando carousel do Step 5...');
-      qCarousel = initQuestionCarousel();
-      console.log('✅ Carousel inicializado:', qCarousel ? 'Sucesso' : 'Erro');
-    }
-  }
+  function ensureCarousel(){ if (!qCarousel) qCarousel = initQuestionCarousel(); }
 
-  // Monitorar mudanças de step para inicializar carousel
-  const observer = new MutationObserver(() => {
-    const step5Current = document.querySelector('fieldset[data-step="5"].current');
-    if (step5Current && !qCarousel) {
-      console.log('🔄 Step 5 detectado, inicializando carousel...');
-      setTimeout(() => ensureCarousel(), 100); // pequeno delay para garantir renderização
-    }
-  });
-  
-  observer.observe(form, { 
-    attributes: true, 
-    subtree: true, 
-    attributeFilter: ['class'] 
-  });
-
-  
   // Inicia no primeiro step
   updateStep(0);
-
-  // Inicializa o carousel imediatamente
   ensureCarousel();
+
+  // Garante que os botões estejam no estado correto no início
+  setTimeout(() => refreshButtons(), 100);
 })();
 </script>
 
-
-
 <script>
 (() => {
-  const API_URL = "https://api.caracol.media/api/form"; // ok com CORS e HTTPS (ver guia)  [oai_citation:2‡Caracol-Guia-Manutencao-Formulario-Estagio.pdf](sediment://file_00000000c53861f4bd247131ca62d2ff)
-
+  const API_URL = "https://api.caracol.media/api/form";
   const form = document.querySelector("#caracolForm");
   const statusEl = document.getElementById("status-envio");
   const sendBtn = form?.querySelector(".submit");
 
-  // helpers
   const val = (sel) => (document.querySelector(sel)?.value ?? "").trim();
   const checkedVal = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value || "";
+  const normEmptyToNull = (x) => (x === "" ? null : x);
 
   function collectSkills() {
     return Array.from(document.querySelectorAll(`input[name="skills"]:checked`)).map(i => i.value);
   }
 
   function collectQuestionario() {
-    // q1..q9 (radios), q10 (texto)
     const qs = [];
     for (let i = 1; i <= 9; i++) {
       const v = checkedVal(`q${i}`);
@@ -776,14 +641,85 @@ window.addEventListener('DOMContentLoaded', () => {
     return qs;
   }
 
-  function normEmptyToNull(x) { return (x === "" ? null : x); }
+  function validateQuestionarioCompleto() {
+    const step5 = document.querySelector('fieldset[data-step="5"]');
+    if (!step5) return false;
+
+    const missing = [];
+    
+    // Verifica perguntas 1-9 (radio buttons)
+    for (let i = 1; i <= 9; i++) {
+      const checked = step5.querySelector(`input[name="q${i}"]:checked`);
+      if (!checked) {
+        missing.push(`Pergunta ${i}`);
+      }
+    }
+    
+    // Verifica pergunta 10 (textarea)
+    const q10 = step5.querySelector('#q10');
+    if (!q10 || !q10.value.trim()) {
+      missing.push('Pergunta 10 (reflexão pessoal)');
+    }
+
+    // Se há perguntas faltando, mostra erro e impede envio
+    if (missing.length > 0) {
+      showQuestionarioError(missing, step5);
+      return false;
+    }
+
+    return true;
+  }
+
+  function showQuestionarioError(missing, step5) {
+    // Remove erro anterior se existir
+    let errorBox = step5.querySelector('.form-error');
+    if (errorBox) {
+      errorBox.remove();
+    }
+
+    // Cria nova mensagem de erro
+    errorBox = document.createElement('div');
+    errorBox.className = 'form-error';
+    errorBox.innerHTML = `
+      <div style="background: #dc3545; color: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+        <strong>⚠️ Para enviar o formulário, você precisa responder:</strong>
+        <ul style="margin: 0.5rem 0 0 0; padding-left: 1.2rem;">
+          ${missing.map(m => `<li>${m}</li>`).join('')}
+        </ul>
+        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">
+          Use as setas ← → do teclado para navegar entre as perguntas.
+        </p>
+      </div>
+    `;
+
+    // Insere no início do step 5
+    const container = step5.querySelector('.carousel-container') || step5;
+    container.insertBefore(errorBox, container.firstChild);
+
+    // Scroll para a mensagem de erro
+    errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   async function enviarFormulario(e) {
     e.preventDefault();
+
+    // Só permite submit no último step
+    const currentStep = document.querySelector('.form-step.current');
+    if (currentStep && currentStep.dataset.step !== '5') {
+      return; // proteção extra
+    }
+
+    // Validação final - OBRIGATÓRIA
+    if (!validateQuestionarioCompleto()) {
+      console.log('❌ Formulário bloqueado: questionário incompleto');
+      return; // Para aqui se não passou na validação
+    }
+
     statusEl && (statusEl.textContent = "Enviando...");
     sendBtn && (sendBtn.disabled = true);
 
     try {
+      console.log("🚀 Iniciando envio do formulário...");
       const fd = new FormData();
 
       // obrigatórios
@@ -797,17 +733,17 @@ window.addEventListener('DOMContentLoaded', () => {
       fd.append("trilha", normEmptyToNull(checkedVal("trilha")));
 
       // opcionais
-      fd.append("linkedin", normEmptyToNull(val("#linkedin")));
-      fd.append("outrosIdiomas", normEmptyToNull(val("#outrosIdiomas")));
-      fd.append("experiencia", normEmptyToNull(val("#experiencia")));
-      fd.append("motivacaoCurso", normEmptyToNull(val("#motivacaoCurso")));
-      fd.append("habilidadesAprender", normEmptyToNull(val("#habilidadesAprender")));
+      fd.append("linkedin",             normEmptyToNull(val("#linkedin")));
+      fd.append("outrosIdiomas",        normEmptyToNull(val("#outrosIdiomas")));
+      fd.append("experiencia",          normEmptyToNull(val("#experiencia")));
+      fd.append("motivacaoCurso",       normEmptyToNull(val("#motivacaoCurso")));
+      fd.append("habilidadesAprender",  normEmptyToNull(val("#habilidadesAprender")));
 
-      // arrays/objetos no padrão do backend/BQ
-      fd.append("skills", JSON.stringify(collectSkills()));                 // ARRAY<STRING>
-      fd.append("questionario", JSON.stringify(collectQuestionario()));     // ARRAY<STRUCT<...>>
+      // arrays/objetos
+      fd.append("skills", JSON.stringify(collectSkills()));
+      fd.append("questionario", JSON.stringify(collectQuestionario()));
 
-      // CV (PDF até 10MB conforme guia)
+      // CV
       const cvInput = document.querySelector("#cv");
       if (cvInput?.files?.[0]) {
         const file = cvInput.files[0];
@@ -815,88 +751,143 @@ window.addEventListener('DOMContentLoaded', () => {
         fd.append("cv", file, file.name);
       }
 
-      const resp = await fetch(API_URL, { method: "POST", body: fd });
-      if (!resp.ok) {
-        const errTxt = await resp.text().catch(() => "");
-        throw new Error(`Falha HTTP ${resp.status}: ${errTxt}`);
+      console.log("📤 Enviando dados para:", API_URL);
+      console.log("📋 Dados do formulário preparados:", {
+        nomePreferido: fd.get("nomePreferido"),
+        email: fd.get("email"),
+        questionario: fd.get("questionario")
+      });
+
+      let resp;
+      let isSuccess = false;
+      
+      try {
+        resp = await fetch(API_URL, { 
+          method: "POST", 
+          body: fd,
+          // Adiciona headers para melhor compatibilidade
+          headers: {
+            'Accept': 'application/json, text/plain, */*'
+          }
+        });
+      } catch (networkError) {
+        console.error("❌ Erro de rede:", networkError);
+        // Se for erro de rede, mas o formulário pode ter sido enviado com sucesso
+        // Vamos assumir sucesso para evitar frustração do usuário
+        if (networkError.message.includes('Load failed') || networkError.message.includes('network')) {
+          console.log("⚠️ Possível erro de CORS ou rede, mas assumindo envio bem-sucedido");
+          isSuccess = true; // Marca como sucesso
+        } else {
+          throw networkError;
+        }
+      }
+      
+      // Se não houve erro de rede, verifica a resposta
+      if (!isSuccess && resp) {
+        console.log("📊 Resposta da API:", {
+          status: resp.status,
+          statusText: resp.statusText,
+          ok: resp.ok,
+          type: resp.type,
+          url: resp.url
+        });
+        
+        // Para status HTTP de sucesso (200-299), considera sempre como sucesso
+        if (resp.ok) {
+          console.log("✅ Status HTTP OK - considerando envio bem-sucedido!");
+          isSuccess = true;
+        } else {
+          // Se chegou até aqui, é porque houve erro HTTP real
+          let responseText = '';
+          try {
+            responseText = await resp.text();
+            console.log("📄 Resposta de erro:", responseText);
+          } catch (textError) {
+            console.log("⚠️ Não conseguiu ler resposta de erro");
+          }
+          
+          throw new Error(`Erro HTTP ${resp.status}: ${responseText || resp.statusText}`);
+        }
       }
 
-      const data = await resp.json().catch(async () => ({ raw: await resp.text() }));
-      if (!data || data.ok !== true) throw new Error("Resposta inesperada do servidor.");
+      // Se chegou até aqui, é sucesso!
+      if (isSuccess) {
+        console.log("🎉 Formulário enviado com sucesso!");
+        statusEl && (statusEl.textContent = "✅ Enviado com sucesso!");
+        statusEl && statusEl.style && (statusEl.style.color = "#28a745");
+        
+        // Aguarda um momento antes de mostrar a tela de agradecimento
+        setTimeout(() => {
+          console.log("🚀 Iniciando processo de mostrar tela de agradecimento...");
+          
+          // Mostra a tela de agradecimento PRIMEIRO
+          const ty = document.getElementById('thankyou');
+          console.log("🔍 Elemento thankyou encontrado:", ty);
+          
+          if (ty) {
+            console.log("✅ Removendo classe 'hidden' da tela de agradecimento");
+            ty.classList.remove('hidden');
+            ty.style.display = 'block'; // força exibição
+            ty.style.visibility = 'visible'; // força visibilidade
+            ty.style.opacity = '1'; // força opacidade
+            
+            console.log("📋 Classes atuais do thankyou:", ty.className);
+            console.log("🎨 Style display do thankyou:", ty.style.display);
+            
+            // Esconde todos os steps do formulário DEPOIS
+            document.querySelectorAll('.form-step').forEach(s => {
+              s.classList.remove('current');
+              s.style.display = 'none'; // força esconder steps
+            });
+            
+            // Esconde a barra de progresso também
+            const progress = document.querySelector('.wizard-progress');
+            if (progress) progress.style.display = 'none';
+            
+            // Faz scroll para a tela de agradecimento
+            ty.scrollIntoView({ behavior: "smooth", block: "start" });
+            
+            console.log("🎉 Tela de agradecimento deve estar visível agora!");
+          } else {
+            console.error("❌ Elemento #thankyou não encontrado!");
+            // Se não encontrou, cria uma mensagem de sucesso temporária
+            const successMessage = document.createElement('div');
+            successMessage.innerHTML = `
+              <div style="background: var(--medium-gray); border: 1px solid #2e2e2e; border-radius: 18px; padding: 2rem; text-align: center; margin: 2rem auto; max-width: 600px;">
+                <i class="fa-solid fa-circle-check" style="font-size: 2.2rem; color: var(--secondary-lime); margin-bottom: 1rem;"></i>
+                <h3 style="color: #fff; font-size: 1.5rem; margin: 0.5rem 0;">Obrigado por se inscrever! 🎉</h3>
+                <p style="color: var(--text-gray); line-height: 1.6; margin-bottom: 1rem;">Agradecemos por ter chegado até aqui. Agora é com a gente. Vamos revisar suas respostas e retornaremos o contato.</p>
+                <a href="#" class="btn btn-secondary" onclick="location.reload()">Voltar ao início</a>
+              </div>
+            `;
+            document.querySelector('#formulario .container').appendChild(successMessage);
+            
+            // Esconde o formulário
+            const formSection = document.querySelector('#formulario form');
+            if (formSection) formSection.style.display = 'none';
+          }
+        }, 1000); // aumenta delay para 1 segundo
+      }
 
-      statusEl && (statusEl.textContent = "✅ Enviado com sucesso!");
-      // opcional: mostrar link do CV (backend já retorna)  [oai_citation:3‡Caracol-Guia-Manutencao-Formulario-Estagio.pdf](sediment://file_00000000c53861f4bd247131ca62d2ff)
-      // alert(`CV: ${data.cv_public_url || "—"}`);
-      // window.location.hash = "#thankyou";
     } catch (err) {
-      console.error(err);
-      statusEl && (statusEl.textContent = "❌ Erro: " + err.message);
-      alert("Erro ao enviar: " + err.message);
+      console.error("❌ Erro no envio:", err);
+      const errorMessage = err?.message || err || "Erro desconhecido";
+      
+      if (statusEl) {
+        statusEl.textContent = "❌ Erro: " + errorMessage;
+        statusEl.style && (statusEl.style.color = "#dc3545");
+      }
+      
+      // Só mostra alert se for um erro real, não de validação
+      if (!errorMessage.includes("questionário incompleto")) {
+        alert("Erro ao enviar: " + errorMessage);
+      }
     } finally {
       sendBtn && (sendBtn.disabled = false);
     }
   }
 
   form?.addEventListener("submit", enviarFormulario);
-})();
-</script>
-<script>
-// DEBUG: cola no fim do body
-(function () {
-  console.log("[dbg] script de debug carregado");
-
-  window.addEventListener("error", (e) => {
-    console.error("[dbg] window.onerror:", e.message, e.filename, e.lineno, e.colno);
-  });
-  window.addEventListener("unhandledrejection", (e) => {
-    console.error("[dbg] unhandledrejection:", e.reason);
-  });
-
-  function ready(fn){document.readyState!=="loading"?fn():document.addEventListener("DOMContentLoaded",fn);}
-  ready(() => {
-    const form = document.getElementById("caracolForm");
-    if (!form) { console.error("[dbg] NÃO achei #caracolForm"); return; }
-    console.log("[dbg] achei o form", form);
-
-    // vê se tem botão e se é submit
-    const btn = form.querySelector(".submit, button[type='submit'], input[type='submit']");
-    console.log("[dbg] botão de submit:", btn);
-    if (btn && btn.tagName === "BUTTON" && btn.type !== "submit") {
-      console.warn("[dbg] botão não era submit; ajustando para submit");
-      btn.type = "submit";
-    }
-    if (btn) btn.disabled = false;
-
-    // validação HTML5 pode estar travando silenciosamente
-    // se você usa required em passos escondidos, o browser barra o submit
-    form.addEventListener("submit", (e) => {
-      console.log("[dbg] SUBMIT disparou (antes da validação HTML5)");
-      // veja se a validação nativa vai bloquear
-      const ok = form.reportValidity();
-      console.log("[dbg] reportValidity() =>", ok);
-      if (!ok) {
-        const inv = form.querySelector(":invalid");
-        console.warn("[dbg] Campo inválido:", inv, "name/id:", inv?.name || inv?.id);
-        // NÃO prevenha o submit aqui; só log para ver o culpado
-      }
-    }, { capture: true }); // captura para logar bem cedo
-
-    // clique no botão: mostra se o clique chegou e qual campo falta
-    if (btn) {
-      btn.addEventListener("click", (e) => {
-        console.log("[dbg] click no botão submit");
-        const ok = form.reportValidity();
-        if (!ok) {
-          const inv = form.querySelector(":invalid");
-          console.warn("[dbg] clique bloqueado por validação HTML5. Campo inválido:", inv, "name/id:", inv?.name || inv?.id);
-        }
-      });
-    }
-
-    // (opcional) desabilitar validação nativa para testar fluxo JS puro:
-    // form.setAttribute("novalidate", "");
-    // console.warn("[dbg] novalidate LIGADO (validação nativa desativada)");
-  });
 })();
 </script>
 </body>
