@@ -576,17 +576,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.next').forEach(b => b.addEventListener('click', next));
   document.querySelectorAll('.prev').forEach(b => b.addEventListener('click', prev));
 
-  // Submit do formulário
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!validateStep(current)) return;
-    
-    // Mostrar página de obrigado
-    form.querySelectorAll('.form-step').forEach(s => s.classList.remove('current'));
-    document.getElementById('thankyou').classList.remove('hidden');
-    progressFill.style.width = '100%';
-    dots.forEach(d => d.classList.add('active'));
-  });
+
 
   // ========== CAROUSEL DO STEP 5 ========== 
   function initQuestionCarousel(){
@@ -747,98 +737,7 @@ window.addEventListener('DOMContentLoaded', () => {
     attributeFilter: ['class'] 
   });
 
-  // ========== VALIDAÇÃO ESPECÍFICA DO STEP 5 ========== 
-  form.addEventListener('submit', (e) => {
-    const currentStep = form.querySelector('.form-step.current');
-    
-    // Só valida se estivermos no step 5
-    if (currentStep && currentStep.dataset.step === '5') {
-      const step5 = currentStep;
-      const missing = [];
-      const questionTitles = [];
-      
-      // Mapear títulos das perguntas para feedback mais claro
-      const questionMap = {
-        1: "Campanha global",
-        2: "Dados brutos", 
-        3: "Cliente exigente",
-        4: "Ritmo Caracol",
-        5: "Conteúdo sem briefing",
-        6: "Aprendizado rápido",
-        7: "Erro descoberto",
-        8: "Prazo apertado",
-        9: "Reuniões em inglês",
-        10: "Reflexão pessoal"
-      };
-      
-      // Verifica todas as perguntas de 1 a 9 (rádios)
-      for(let k = 1; k <= 9; k++){
-        const name = `q${k}`;
-        const checked = step5.querySelector(`input[name="${name}"]:checked`);
-        if (!checked) {
-          missing.push(k);
-          questionTitles.push(`${k}) ${questionMap[k]}`);
-        }
-      }
-      
-      // Verifica pergunta 10 (textarea)
-      const q10 = step5.querySelector('#q10');
-      if (q10 && !q10.value.trim()) {
-        missing.push(10);
-        questionTitles.push(`10) ${questionMap[10]}`);
-      }
-
-      if (missing.length > 0) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        // Remove erro anterior se existir
-        const oldError = step5.querySelector('.form-error');
-        if (oldError) {
-          oldError.remove();
-        }
-        
-        // Cria nova mensagem de erro mais detalhada
-        const errorBox = document.createElement('div');
-        errorBox.className = 'form-error';
-        errorBox.innerHTML = `
-          <strong>⚠️ Faltam ${missing.length} pergunta${missing.length > 1 ? 's' : ''}:</strong>
-          <ul>${questionTitles.map(title => `<li>${title}</li>`).join('')}</ul>
-          <p><small>💡 Dica: Use as setas ← → do teclado para navegar rapidamente entre as perguntas.</small></p>
-          <div style="margin-top: 0.75rem;">
-            <button type="button" class="btn btn-secondary" onclick="this.closest('.form-error').remove()" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
-              Entendi, vou completar
-            </button>
-          </div>
-        `;
-        step5.insertBefore(errorBox, step5.firstChild);
-        
-        // Volta para a primeira pergunta não respondida
-        const firstMissingIndex = missing[0] - 1;
-        if (qCarousel && firstMissingIndex >= 0) {
-          setTimeout(() => {
-            qCarousel.showQuestion(firstMissingIndex);
-          }, 100);
-        }
-        
-        // Scroll para o erro
-        errorBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
-        console.log('Perguntas não respondidas:', missing);
-        return false;
-      } else {
-        // Remove mensagem de erro se tudo estiver preenchido
-        const errorBox = step5.querySelector('.form-error');
-        if (errorBox) {
-          errorBox.remove();
-        }
-        
-        // Feedback positivo antes do envio
-        console.log('✅ Todas as perguntas respondidas! Enviando formulário...');
-      }
-    }
-  });
-
+  
   // Inicia no primeiro step
   updateStep(0);
 
@@ -851,19 +750,33 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <script>
 (() => {
-  // 1) CONFIRA esta URL
-  const API_URL = "https://api.caracol.media/api/form";
+  const API_URL = "https://api.caracol.media/api/form"; // ok com CORS e HTTPS (ver guia)  [oai_citation:2‡Caracol-Guia-Manutencao-Formulario-Estagio.pdf](sediment://file_00000000c53861f4bd247131ca62d2ff)
 
-  // 2) Helper: coleta valores com fallback
-  const getVal = (sel) => {
-    const el = document.querySelector(sel);
-    return el ? (el.value ?? "").trim() : "";
-  };
+  const form = document.querySelector("#caracolForm");
+  const statusEl = document.getElementById("status-envio");
+  const sendBtn = form?.querySelector(".submit");
 
-  // 3) Pegue o form/botões corretos
-  const form = document.querySelector("#caracolForm"); // ajuste o seletor se for outro id
-  const sendBtn = document.querySelector("#btn-enviar"); // ajuste se necessário
-  const statusEl = document.querySelector("#status-envio"); // um <div id="status-envio"></div> para mensagens
+  // helpers
+  const val = (sel) => (document.querySelector(sel)?.value ?? "").trim();
+  const checkedVal = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value || "";
+
+  function collectSkills() {
+    return Array.from(document.querySelectorAll(`input[name="skills"]:checked`)).map(i => i.value);
+  }
+
+  function collectQuestionario() {
+    // q1..q9 (radios), q10 (texto)
+    const qs = [];
+    for (let i = 1; i <= 9; i++) {
+      const v = checkedVal(`q${i}`);
+      if (v) qs.push({ id: `q${i}`, tipo: "single_choice", resposta: v });
+    }
+    const q10 = val("#q10");
+    if (q10) qs.push({ id: "q10", tipo: "texto", resposta: q10 });
+    return qs;
+  }
+
+  function normEmptyToNull(x) { return (x === "" ? null : x); }
 
   async function enviarFormulario(e) {
     e.preventDefault();
@@ -871,81 +784,60 @@ window.addEventListener('DOMContentLoaded', () => {
     sendBtn && (sendBtn.disabled = true);
 
     try {
-      // 4) Monte o FormData SEM headers custom
       const fd = new FormData();
 
-      // Campos básicos
-      fd.append("nomePreferido", getVal("[name='nomePreferido']"));
-      fd.append("email",         getVal("[name='email']"));
-      fd.append("cidadeEstado",  getVal("[name='cidadeEstado']"));
-      fd.append("curso",         getVal("[name='curso']"));
-      fd.append("ingles",        getVal("[name='ingles']"));
-      fd.append("trilha",        getVal("[name='trilha']"));
+      // obrigatórios
+      fd.append("nomePreferido", normEmptyToNull(val("#nomePreferido")));
+      fd.append("email",         normEmptyToNull(val("#email")));
+      fd.append("cidadeEstado",  normEmptyToNull(val("#cidadeEstado")));
+      fd.append("curso",         normEmptyToNull(val("#curso")));
 
-      // 5) Skills (checkboxes) → array
-      const skillsArr = Array.from(document.querySelectorAll("[name='skills[]']:checked")).map(i => i.value);
-      fd.append("skills", JSON.stringify(skillsArr));   // << importante: JSON.stringify
+      // radios
+      fd.append("ingles", normEmptyToNull(checkedVal("ingles")));
+      fd.append("trilha", normEmptyToNull(checkedVal("trilha")));
 
-      // 6) Questionário (se você guarda em JS, substitua por sua estrutura)
-      // Caso não tenha nada, mande [] para não estourar schema no BQ
-      const questionario = window.__questionario_respostas__ || [];
-      fd.append("questionario", JSON.stringify(questionario));
+      // opcionais
+      fd.append("linkedin", normEmptyToNull(val("#linkedin")));
+      fd.append("outrosIdiomas", normEmptyToNull(val("#outrosIdiomas")));
+      fd.append("experiencia", normEmptyToNull(val("#experiencia")));
+      fd.append("motivacaoCurso", normEmptyToNull(val("#motivacaoCurso")));
+      fd.append("habilidadesAprender", normEmptyToNull(val("#habilidadesAprender")));
 
-      // 7) CV (opcional)
-      const cvInput = document.querySelector("input[name='cv']");
-      if (cvInput && cvInput.files && cvInput.files[0]) {
+      // arrays/objetos no padrão do backend/BQ
+      fd.append("skills", JSON.stringify(collectSkills()));                 // ARRAY<STRING>
+      fd.append("questionario", JSON.stringify(collectQuestionario()));     // ARRAY<STRUCT<...>>
+
+      // CV (PDF até 10MB conforme guia)
+      const cvInput = document.querySelector("#cv");
+      if (cvInput?.files?.[0]) {
         const file = cvInput.files[0];
-        // limite (10MB) — ajuste se quiser
-        if (file.size > 10 * 1024 * 1024) {
-          throw new Error("Seu PDF ultrapassa 10MB. Comprime o arquivo e tente novamente.");
-        }
+        if (file.size > 10 * 1024 * 1024) throw new Error("PDF maior que 10MB.");
         fd.append("cv", file, file.name);
       }
 
-      // 8) Envio sem QUALQUER header extra (nada de X-Idempotency-Key etc.)
       const resp = await fetch(API_URL, { method: "POST", body: fd });
-
-      // 9) Diagnóstico rápido (logar cabeçalhos e status)
-      console.log("status:", resp.status);
-      console.log("resp headers:", Array.from(resp.headers.entries()));
-
-      // CORS ok? (no browser precisa vir SÓ UMA origem)
-      const allowOrigin = resp.headers.get("access-control-allow-origin");
-      console.log("ACAO:", allowOrigin);
-
       if (!resp.ok) {
-        const text = await resp.text().catch(() => "");
-        throw new Error(`Falha HTTP ${resp.status}: ${text}`);
+        const errTxt = await resp.text().catch(() => "");
+        throw new Error(`Falha HTTP ${resp.status}: ${errTxt}`);
       }
 
-      // Resposta JSON do backend
-      let data;
-      try { data = await resp.json(); }
-      catch { data = { raw: await resp.text() }; }
-
-      console.log("resp data:", data);
-
-      if (!data || data.ok !== true) {
-        throw new Error("Resposta inesperada do servidor.");
-      }
+      const data = await resp.json().catch(async () => ({ raw: await resp.text() }));
+      if (!data || data.ok !== true) throw new Error("Resposta inesperada do servidor.");
 
       statusEl && (statusEl.textContent = "✅ Enviado com sucesso!");
-      // Redirecionar para “Obrigado” se quiser:
-      // window.location.href = "/programadeestagio/obrigado";
+      // opcional: mostrar link do CV (backend já retorna)  [oai_citation:3‡Caracol-Guia-Manutencao-Formulario-Estagio.pdf](sediment://file_00000000c53861f4bd247131ca62d2ff)
+      // alert(`CV: ${data.cv_public_url || "—"}`);
+      // window.location.hash = "#thankyou";
     } catch (err) {
       console.error(err);
-      statusEl && (statusEl.textContent = "❌ Falha ao enviar formulário. " + err.message);
+      statusEl && (statusEl.textContent = "❌ Erro: " + err.message);
       alert("Erro ao enviar: " + err.message);
     } finally {
       sendBtn && (sendBtn.disabled = false);
     }
   }
 
-  if (form) {
-    form.addEventListener("submit", enviarFormulario);
-  } else {
-    console.warn("Formulário não encontrado: #form-estagio");
-  }
+  form?.addEventListener("submit", enviarFormulario);
 })();
 </script>
 
