@@ -2398,7 +2398,7 @@ footer ul li a:hover {
 }
 
 .fit-tab.is-active.fit-tab-warn {
-  background: linear-gradient(45deg, #ff4d4d, #ff0000);
+  background: linear-gradient(45deg, #ff7675, #ff6b6b);
   color: #fff;
 }
 
@@ -3134,12 +3134,61 @@ fieldset[data-step="5"] .qblock input[type="radio"] {
 .btn-primary { background: linear-gradient(90deg, var(--primary-orange), var(--accent-yellow)); color:#000; }
 .btn-secondary { background:#222; color:#fff; border:1px solid #3a3a3a; }
 
-.thankyou.hidden { display:none; }
-.ty-card {
-  background: var(--medium-gray); border:1px solid #2e2e2e; border-radius:18px; padding:2rem;
-  display:grid; place-items:center; text-align:center; gap:.6rem; margin-top:1rem;
+/* Esconde o botão enviar por padrão no Step 5 */
+fieldset[data-step="5"] .submit { display: none !important; }
+fieldset[data-step="5"] .submit.show { display: inline-block !important; }
+
+.thankyou.hidden { 
+  display: none !important; 
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
-.ty-card i { font-size:2.2rem; color: var(--secondary-lime); }
+
+.thankyou {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin: 2rem 0;
+  padding: 2rem 0;
+  position: relative;
+  z-index: 999;
+}
+
+.ty-card {
+  background: var(--medium-gray); 
+  border: 1px solid #2e2e2e; 
+  border-radius: 18px; 
+  padding: 2rem;
+  display: grid; 
+  place-items: center; 
+  text-align: center; 
+  gap: 1rem; 
+  margin: 1rem auto;
+  max-width: 600px;
+  position: relative;
+  z-index: 1000;
+}
+
+.ty-card i { 
+  font-size: 2.2rem; 
+  color: var(--secondary-lime); 
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.ty-card h3 { 
+  color: #fff !important; 
+  font-size: 1.5rem; 
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+
+.ty-card p { 
+  color: var(--text-gray) !important; 
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
 
 /* ===== Fix alinhamento – bloco de Idiomas ===== */
 .choices-columns{
