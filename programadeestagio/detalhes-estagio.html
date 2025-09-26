@@ -840,6 +840,64 @@ window.addEventListener('DOMContentLoaded', () => {
   form?.addEventListener("submit", enviarFormulario);
 })();
 </script>
+<script>
+// DEBUG: cola no fim do body
+(function () {
+  console.log("[dbg] script de debug carregado");
 
+  window.addEventListener("error", (e) => {
+    console.error("[dbg] window.onerror:", e.message, e.filename, e.lineno, e.colno);
+  });
+  window.addEventListener("unhandledrejection", (e) => {
+    console.error("[dbg] unhandledrejection:", e.reason);
+  });
+
+  function ready(fn){document.readyState!=="loading"?fn():document.addEventListener("DOMContentLoaded",fn);}
+  ready(() => {
+    const form = document.getElementById("caracolForm");
+    if (!form) { console.error("[dbg] NÃO achei #caracolForm"); return; }
+    console.log("[dbg] achei o form", form);
+
+    // vê se tem botão e se é submit
+    const btn = form.querySelector(".submit, button[type='submit'], input[type='submit']");
+    console.log("[dbg] botão de submit:", btn);
+    if (btn && btn.tagName === "BUTTON" && btn.type !== "submit") {
+      console.warn("[dbg] botão não era submit; ajustando para submit");
+      btn.type = "submit";
+    }
+    if (btn) btn.disabled = false;
+
+    // validação HTML5 pode estar travando silenciosamente
+    // se você usa required em passos escondidos, o browser barra o submit
+    form.addEventListener("submit", (e) => {
+      console.log("[dbg] SUBMIT disparou (antes da validação HTML5)");
+      // veja se a validação nativa vai bloquear
+      const ok = form.reportValidity();
+      console.log("[dbg] reportValidity() =>", ok);
+      if (!ok) {
+        const inv = form.querySelector(":invalid");
+        console.warn("[dbg] Campo inválido:", inv, "name/id:", inv?.name || inv?.id);
+        // NÃO prevenha o submit aqui; só log para ver o culpado
+      }
+    }, { capture: true }); // captura para logar bem cedo
+
+    // clique no botão: mostra se o clique chegou e qual campo falta
+    if (btn) {
+      btn.addEventListener("click", (e) => {
+        console.log("[dbg] click no botão submit");
+        const ok = form.reportValidity();
+        if (!ok) {
+          const inv = form.querySelector(":invalid");
+          console.warn("[dbg] clique bloqueado por validação HTML5. Campo inválido:", inv, "name/id:", inv?.name || inv?.id);
+        }
+      });
+    }
+
+    // (opcional) desabilitar validação nativa para testar fluxo JS puro:
+    // form.setAttribute("novalidate", "");
+    // console.warn("[dbg] novalidate LIGADO (validação nativa desativada)");
+  });
+})();
+</script>
 </body>
 </html>
