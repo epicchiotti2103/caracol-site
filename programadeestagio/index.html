@@ -93,7 +93,7 @@
                 <div class="floating-cards">
     <div class="card-floating card-01">
         <i class="fas fa-medal"></i>
-        <span>Meritocracia</span>
+        <span>Reconhecimento</span>
     </div>
     <div class="card-floating card-02">
         <i class="fas fa-star"></i>
@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <button class="panel-close" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
         </div>
 <p><strong>Aqui você vai ser o braço direito na operação de mídia da Caracol.</strong></p>  
-<p>Vai mergulhar no universo das campanhas mobile, aprendendo a usar o <strong>AppsFlyer</strong> para acompanhar eventos, resultados e até detectar fraudes (a gente ensina tudo).</p>  
+<p>Vai mergulhar no universo das campanhas mobile, aprendendo a usar as ferramentas mais importantes para acompanhar eventos, resultados e até detectar fraudes (a gente ensina tudo).</p>  
 <p>Trabalho direto com o CTO nas entregas de mídia para grandes clientes, com campanhas que movimentam milhões.</p>  
 <p>Rotina intensa com <strong>planilhas avançadas</strong>, relatórios de performance e otimizações em tempo real. Curtir dados e achar padrões rápido é essencial.</p>  
 <p>No dia a dia, você também vai apoiar no relacionamento com publishers globais, participando de reuniões em inglês (muito Ásia) para garantir máxima eficiência.</p>  
@@ -596,5 +596,145 @@ document.addEventListener("DOMContentLoaded", function() {
       }));
     })();
   </script>
+
+  <script>
+(function(){
+  const form = document.getElementById('caracolForm');
+  const steps = Array.from(document.querySelectorAll('.form-step'));
+  const dots  = Array.from(document.querySelectorAll('.wizard-steps .dot'));
+  const progressFill = document.getElementById('wizardProgressFill');
+  const maxStep = steps.length;
+  let current = 0; // index do step
+
+  // Navegação
+  function updateStep(idx){
+    steps.forEach((s,i)=> s.classList.toggle('current', i===idx));
+    dots.forEach((d,i)=> d.classList.toggle('active', i<=idx));
+    const pct = Math.max(10, Math.round(((idx+1)/maxStep)*100));
+    progressFill.style.width = pct + '%';
+    current = idx;
+    // scroll suave para o topo do form
+    steps[idx].scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function next(){
+    if (!validateStep(current)) return;
+    if (current < maxStep-1) updateStep(current+1);
+  }
+  function prev(){
+    if (current > 0) updateStep(current-1);
+  }
+
+  // Validação simples do step atual
+  function validateStep(idx){
+    const fieldset = steps[idx];
+    const required = Array.from(fieldset.querySelectorAll('[required]'));
+    let ok = true;
+    required.forEach(el=>{
+      if (el.type === 'radio'){
+        const group = fieldset.querySelectorAll(`input[name="${el.name}"]`);
+        const anyChecked = Array.from(group).some(r=>r.checked);
+        if (!anyChecked){ ok=false; markInvalid(group[0]); }
+      } else if (el.type === 'file'){
+        if (!el.files || !el.files[0]){ ok=false; markInvalid(el); }
+      } else {
+        if (!el.value.trim()){ ok=false; markInvalid(el); }
+      }
+    });
+    return ok;
+  }
+  function markInvalid(el){
+    el.focus();
+    el.closest('.field')?.classList.add('invalid');
+    setTimeout(()=> el.closest('.field')?.classList.remove('invalid'), 1200);
+  }
+
+  // Botões
+  document.querySelectorAll('.next').forEach(b=> b.addEventListener('click', next));
+  document.querySelectorAll('.prev').forEach(b=> b.addEventListener('click', prev));
+
+  // Upload: valida PDF e 10MB
+  const cvInput = document.getElementById('cv');
+  const cvStatus = document.getElementById('cvStatus');
+  cvInput.addEventListener('change', ()=>{
+    const f = cvInput.files?.[0];
+    if (!f){ cvStatus.textContent = 'Anexe seu PDF. Tamanho máximo: 10MB.'; return; }
+    const isPDF = f.type === 'application/pdf' || /\.pdf$/i.test(f.name);
+    const under10 = f.size <= 10 * 1024 * 1024;
+    if (!isPDF || !under10){
+      cvStatus.textContent = 'Arquivo inválido (somente PDF até 10MB).';
+      cvStatus.style.color = '#ff6b6b';
+      cvInput.value = '';
+    } else {
+      cvStatus.textContent = `Arquivo anexado: ${f.name} • ${(f.size/1024/1024).toFixed(2)} MB`;
+      cvStatus.style.color = '';
+    }
+  });
+
+  // Auto-save local (sem backend)
+  const LS_KEY = 'caracol_form_v1';
+  // restaura
+  try {
+    const saved = JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+    if (saved){
+      Object.entries(saved).forEach(([k,v])=>{
+        const el = form.elements[k];
+        if (!el) return;
+        if (el instanceof RadioNodeList){
+          Array.from(form.querySelectorAll(`[name="${k}"]`)).forEach(r=> { r.checked = r.value === v; });
+        } else if (el.type === 'checkbox'){
+          el.checked = !!v;
+        } else if (el.type !== 'file'){
+          el.value = v;
+        }
+      });
+    }
+  } catch(e){ /* ignore */ }
+
+  // salva (exceto arquivo)
+  form.addEventListener('input', (e)=>{
+    if (!(e.target instanceof HTMLElement)) return;
+    const obj = {};
+    Array.from(form.elements).forEach(el=>{
+      if (!el.name) return;
+      if (el.type === 'file') return;
+      if (el.type === 'radio'){
+        if (el.checked) obj[el.name] = el.value;
+      } else if (el.type === 'checkbox'){
+        // Agrupar checkboxes com mesmo name
+        const checkGroup = form.querySelectorAll(`input[type="checkbox"][name="${el.name}"]`);
+        if (checkGroup.length > 1){
+          obj[el.name] = Array.from(checkGroup).filter(c=>c.checked).map(c=>c.value);
+        } else {
+          obj[el.name] = el.checked;
+        }
+      } else {
+        obj[el.name] = el.value;
+      }
+    });
+    try { localStorage.setItem(LS_KEY, JSON.stringify(obj)); } catch(e){}
+  });
+
+  // Submit — exibe página de obrigado (integrar backend depois)
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    if (!validateStep(current)) return;
+
+    // TODO: integrar com seu backend / Google Forms / API de e-mail
+    // Aqui, apenas mostramos a página de obrigado
+    form.querySelectorAll('.form-step').forEach(s => s.classList.remove('current'));
+    document.getElementById('thankyou').classList.remove('hidden');
+    progressFill.style.width = '100%';
+    dots.forEach(d=>d.classList.add('active'));
+    // Se quiser limpar o rascunho:
+    // localStorage.removeItem(LS_KEY);
+  });
+
+  // Inicia no primeiro step
+  updateStep(0);
+})();
+</script>
+
+
 </body>
 </html>
