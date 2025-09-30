@@ -758,13 +758,33 @@ function fireIRevClickPostback(clickid) {
     img.src = url;
   }
 }
+<!-- filepath: /Users/elio/Documents/caracol_media_site/programadeestagio/index.html -->
+// Substitua a função ensureCtaHasClickId por esta versão corrigida:
+
 function ensureCtaHasClickId(a, clickid) {
   if (!a || !clickid) return;
-  const u = new URL(a.getAttribute('href'), location.origin);
-  u.searchParams.set('clickid', clickid);
-  a.setAttribute('href', u.pathname + u.search + u.hash);
+  
+  try {
+    const currentHref = a.getAttribute('href');
+    
+    // Se for um link relativo (como "detalhes-estagio.html"), mantém relativo
+    if (!currentHref.startsWith('http') && !currentHref.startsWith('/')) {
+      const url = new URL(currentHref, window.location.href);
+      url.searchParams.set('clickid', clickid);
+      // Mantém apenas o pathname relativo + search + hash
+      const relativePath = url.pathname.split('/').pop() + url.search + url.hash;
+      a.setAttribute('href', relativePath);
+    } else {
+      // Para URLs absolutas, usa a lógica original
+      const u = new URL(currentHref, location.origin);
+      u.searchParams.set('clickid', clickid);
+      a.setAttribute('href', u.href);
+    }
+  } catch (e) {
+    console.log('Erro ao processar clickid para link:', a.getAttribute('href'), e);
+    // Em caso de erro, não modifica o link original
+  }
 }
-
 // ---- boot ----
 (function initPostbackCTA(){
   persistClickIdFromURL();
