@@ -151,7 +151,7 @@
           <label>Você fala espanhol?</label>
           <div class="choices choices-columns">
             <label><input type="radio" name="espanhol" value="Não" checked> Não</label>
-            <label><input type="radio" name="espanhol" value="Não" checked> Iniciante</label>
+            <label><input type="radio" name="espanhol" value="Iniciante"> Iniciante</label>
             <label><input type="radio" name="espanhol" value="Intermediário"> Intermediário</label>
             <label><input type="radio" name="espanhol" value="Avançado"> Avançado</label>
           </div>
@@ -723,6 +723,25 @@ window.addEventListener('DOMContentLoaded', () => {
       console.log("🚀 Iniciando envio do formulário...");
       const fd = new FormData();
 
+      // 🎯 CLICKID E METADADOS PARA BIGQUERY
+      const clickid = getClickId();
+      fd.append("clickid", clickid || null);
+      
+      // Informações de sessão e origem
+      fd.append("timestamp", new Date().toISOString());
+      fd.append("user_agent", navigator.userAgent);
+      fd.append("referrer", document.referrer || null);
+      fd.append("page_url", window.location.href);
+      fd.append("session_start", localStorage.getItem('session_start') || new Date().toISOString());
+      
+      // Informações da origem do tráfego
+      const urlParams = new URLSearchParams(window.location.search);
+      fd.append("utm_source", urlParams.get('utm_source') || null);
+      fd.append("utm_medium", urlParams.get('utm_medium') || null);
+      fd.append("utm_campaign", urlParams.get('utm_campaign') || null);
+      fd.append("utm_content", urlParams.get('utm_content') || null);
+      fd.append("utm_term", urlParams.get('utm_term') || null);
+
       // obrigatórios
       fd.append("nomePreferido", normEmptyToNull(val("#nomePreferido")));
       fd.append("email",         normEmptyToNull(val("#email")));
@@ -756,7 +775,16 @@ window.addEventListener('DOMContentLoaded', () => {
       console.log("📋 Dados do formulário preparados:", {
         nomePreferido: fd.get("nomePreferido"),
         email: fd.get("email"),
+        clickid: fd.get("clickid"),
+        trilha: fd.get("trilha"),
         questionario: fd.get("questionario")
+      });
+      console.log("📊 Metadados de tracking:", {
+        clickid: clickid || 'nenhum',
+        timestamp: fd.get("timestamp"),
+        referrer: fd.get("referrer"),
+        utm_source: fd.get("utm_source"),
+        utm_campaign: fd.get("utm_campaign")
       });
 
       let resp;
@@ -944,13 +972,27 @@ function fireIRevConversionPostback(clickid) {
 // Inicializa sistema de clickid ao carregar a página
 (function initPostbackSystem(){
   persistClickIdFromURL();
+  
+  // 🕒 MARCA INÍCIO DA SESSÃO
+  if (!localStorage.getItem('session_start')) {
+    try {
+      localStorage.setItem('session_start', new Date().toISOString());
+    } catch(e) {
+      console.log('Não foi possível salvar session_start:', e);
+    }
+  }
+  
   console.log('🔧 Sistema de postback inicializado');
   const currentClickId = getClickId();
+  const sessionStart = localStorage.getItem('session_start');
+  
   if (currentClickId) {
     console.log('🎯 ClickId detectado:', currentClickId);
   } else {
     console.log('⚠️ Nenhum clickid detectado na sessão');
   }
+  
+  console.log('📅 Sessão iniciada em:', sessionStart);
 })();
 
 </script>
