@@ -253,8 +253,8 @@ document.addEventListener("DOMContentLoaded", function() {
       <span class="core-badge core-badge-yellow">
         <i class="fa-solid fa-mountain"></i> Nossas Oportunidades
       </span>
-      <h2>Duas trilhas, um destino</h2>
-      <p class="subtitle">Você escolhe o caminho — ambos levam ao topo.</p>
+      <h2>Três trilhas, um destino</h2>
+      <p class="subtitle">Você escolhe o caminho — todos levam ao topo.</p>
     </div>
 
     <div class="mountain-canvas" aria-hidden="true">
@@ -275,6 +275,12 @@ document.addEventListener("DOMContentLoaded", function() {
              C420,310 470,320 520,330
              C580,340 610,290 640,250
              C645,235 642,222 640,210" />
+        <!-- Atendimento/Mídia (centro -> cume) -->
+        <path class="trail-path"
+          d="M600,420
+             C600,380 610,350 620,320
+             C625,300 630,280 635,260
+             C638,240 639,225 640,210" />
         <!-- Operações (dir -> cume) -->
         <path class="trail-path"
           d="M980,420
@@ -285,6 +291,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         <!-- Marcadores na base (vagas) -->
         <circle id="dot-vendas" class="trail-dot" cx="220" cy="420" r="10" />
+        <circle id="dot-atendimento" class="trail-dot" cx="600" cy="420" r="10" />
         <circle id="dot-operacoes" class="trail-dot" cx="980" cy="420" r="10" />
       </svg>
 
@@ -292,6 +299,12 @@ document.addEventListener("DOMContentLoaded", function() {
 <button class="trail-title left ver-trilha" data-target="trilha-vendas" aria-expanded="false">
   <i class="fa-solid fa-compass"></i>
   <span class="label">Vendas &amp; Marketing</span>
+  <span class="plus"></span>
+</button>
+
+<button class="trail-title center ver-trilha" data-target="trilha-atendimento" aria-expanded="false">
+  <i class="fa-solid fa-headset"></i>
+  <span class="label">Atendimento / Mídia</span>
   <span class="plus"></span>
 </button>
 
@@ -318,6 +331,24 @@ document.addEventListener("DOMContentLoaded", function() {
   <p>Também vai atuar na construção de inbound marketing: pesquisando tendências, buscando referências globais e transformando em conteúdo que destaque a Caracol como próxima referência em marketing no Brasil.</p>  
   <p><strong>Perfil:</strong> pesquisa, organização e criatividade aplicada. <strong>Rota de crescimento</strong> até gerência de marketing ou direção de vendas (atração → relacionamento → fechamento).</p>  
 </div>         <a href="detalhes-estagio.html#vendas" class="btn btn-primary">
+          <i class="fa-solid fa-rocket"></i> Quero seguir este caminho
+        </a>
+      </div>
+
+      <div id="trilha-atendimento" class="trilha-panel" hidden>
+        <div class="panel-head">
+          <h4><i class="fa-solid fa-headset"></i> Atendimento / Mídia — Trilha completa</h4>
+          <button class="panel-close" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div>
+          <p><strong>Seja o elo entre grandes contas e campanhas multimilionárias de mídia.</strong></p>
+          <p>Nessa trilha, você será o ponto de contato entre a Caracol e clientes de grande porte no Brasil.</p>
+          <p>Seu papel é acompanhar o dia a dia de campanhas digitais robustas: organizar planos de mídia, monitorar KPIs em tempo real e traduzir resultados de forma clara para os clientes.</p>
+          <p>Aqui você vai aprender a ser um profissional de mídia clássico: alguém que entende tanto de <strong>ferramentas de performance</strong> (Google, Meta, TikTok) quanto de relacionamento com clientes exigentes.</p>
+          <p>É a oportunidade de crescer rápido em um ambiente de alto investimento e aprendizado acelerado, convivendo com campanhas que movimentam milhões.</p>
+          <p><strong>Perfil:</strong> comunicação, organização e interesse em performance digital. <strong>Rota de crescimento</strong> até gerência de contas ou direção de mídia.</p>
+        </div>
+        <a href="detalhes-estagio.html#atendimento" class="btn btn-primary">
           <i class="fa-solid fa-rocket"></i> Quero seguir este caminho
         </a>
       </div>
