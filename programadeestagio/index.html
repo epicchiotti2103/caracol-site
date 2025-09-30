@@ -83,9 +83,9 @@
   Este é um programa para quem sonha alto e quer acelerar sua carreira em marketing, vendas, mídia e operações.
 </p>
                 <div class="hero-ctas">
-                    <a href="detalhes-estagio.html" class="btn btn-primary">
-    <i class="fas fa-rocket"></i>
-    Quero crescer com a Caracol
+                    <a href="detalhes-estagio.html" class="btn btn-primary cta-quero-crescer">
+  <i class="fas fa-rocket"></i>
+  Quero crescer com a Caracol
 </a>
                 </div>
             </div>
@@ -202,9 +202,9 @@ document.addEventListener("DOMContentLoaded", function() {
           <li><i class="fa-solid fa-people-group"></i> Valoriza colaboração, fraternidade e autonomia.</li>
           <li><i class="fa-solid fa-globe"></i> Se empolga com clientes grandes e projetos globais.</li>
         </ul>
-        <a href="detalhes-estagio.html" class="btn btn-primary fit-cta">
-          <i class="fa-solid fa-rocket"></i> Quero crescer com a Caracol
-        </a>
+        <a href="detalhes-estagio.html" class="btn btn-primary fit-cta cta-quero-crescer">
+  <i class="fa-solid fa-rocket"></i> Quero crescer com a Caracol
+</a>
       </div>
 
 <div id="fit-no" class="fit-panel fit-panel-warn" role="tabpanel" aria-labelledby="tab-no" hidden>        <ul class="fit-list fit-list-warn">
@@ -735,6 +735,61 @@ document.addEventListener("DOMContentLoaded", function() {
 })();
 </script>
 
+<script>
+// ---- util ----
+function getClickId() {
+  const qs = new URLSearchParams(location.search);
+  return qs.get('clickid') || localStorage.getItem('irev_clickid') || '';
+}
+function persistClickIdFromURL() {
+  const cid = new URLSearchParams(location.search).get('clickid');
+  if (cid) { try { localStorage.setItem('irev_clickid', cid); } catch(e){} }
+}
+// iRev: GET /goal-type-fire/4?hash=<clickid>
+function fireIRevClickPostback(clickid) {
+  if (!clickid) return;
+  const url = 'https://caracol.irev.com/backend/api/v3/goal-type-fire/4?hash='
+            + encodeURIComponent(clickid);
+  try {
+    fetch(url, { method: 'GET', mode: 'no-cors', keepalive: true });
+  } catch (e) {
+    // fallback não-bloqueante
+    const img = new Image();
+    img.src = url;
+  }
+}
+function ensureCtaHasClickId(a, clickid) {
+  if (!a || !clickid) return;
+  const u = new URL(a.getAttribute('href'), location.origin);
+  u.searchParams.set('clickid', clickid);
+  a.setAttribute('href', u.pathname + u.search + u.hash);
+}
+
+// ---- boot ----
+(function initPostbackCTA(){
+  persistClickIdFromURL();
+
+  const ctas = document.querySelectorAll('a.cta-quero-crescer');
+  if (!ctas.length) return;
+
+  const cid = getClickId();
+  ctas.forEach(a => ensureCtaHasClickId(a, cid));
+
+  // Evita duplicar postback na mesma página
+  let sent = false;
+
+  ctas.forEach(a => {
+    a.addEventListener('click', () => {
+      const clickid = getClickId();
+      if (!sent && clickid) {
+        sent = true;
+        fireIRevClickPostback(clickid);
+      }
+      // sem preventDefault; deixa navegar
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
