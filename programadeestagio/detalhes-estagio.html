@@ -821,7 +821,16 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           console.log("🚀 Iniciando processo de mostrar tela de agradecimento...");
           
-          // Mostra a tela de agradecimento PRIMEIRO
+          // Dispara o postback de conversão ANTES de mostrar a tela
+          const clickid = getClickId();
+          if (clickid) {
+            console.log("🎯 Disparando postback de conversão com clickid:", clickid);
+            fireIRevConversionPostback(clickid);
+          } else {
+            console.log("⚠️ Nenhum clickid encontrado para disparar postback de conversão");
+          }
+          
+          // Mostra a tela de agradecimento DEPOIS
           const ty = document.getElementById('thankyou');
           console.log("🔍 Elemento thankyou encontrado:", ty);
           
@@ -890,6 +899,60 @@ window.addEventListener('DOMContentLoaded', () => {
 
   form?.addEventListener("submit", enviarFormulario);
 })();
+
+// ---- Postback System ----
+function getClickId() {
+  const qs = new URLSearchParams(location.search);
+  return qs.get('clickid') || localStorage.getItem('irev_clickid') || '';
+}
+
+function persistClickIdFromURL() {
+  const cid = new URLSearchParams(location.search).get('clickid');
+  if (cid) { 
+    try { 
+      localStorage.setItem('irev_clickid', cid); 
+    } catch(e){
+      console.log('Erro ao salvar clickid no localStorage:', e);
+    } 
+  }
+}
+
+// iRev: GET /goal-type-fire/11?hash=<clickid> (conversão)
+function fireIRevConversionPostback(clickid) {
+  if (!clickid) {
+    console.log('⚠️ Postback de conversão não disparado: clickid vazio');
+    return;
+  }
+  
+  const url = 'https://caracol.irev.com/backend/api/v3/goal-type-fire/11?hash='
+            + encodeURIComponent(clickid);
+  
+  console.log('🚀 Disparando postback de conversão para:', url);
+  
+  try {
+    fetch(url, { method: 'GET', mode: 'no-cors', keepalive: true });
+    console.log('✅ Postback de conversão disparado com sucesso');
+  } catch (e) {
+    // fallback não-bloqueante
+    console.log('⚠️ Erro no fetch do postback, usando fallback Image:', e);
+    const img = new Image();
+    img.src = url;
+    console.log('✅ Postback de conversão disparado via Image fallback');
+  }
+}
+
+// Inicializa sistema de clickid ao carregar a página
+(function initPostbackSystem(){
+  persistClickIdFromURL();
+  console.log('🔧 Sistema de postback inicializado');
+  const currentClickId = getClickId();
+  if (currentClickId) {
+    console.log('🎯 ClickId detectado:', currentClickId);
+  } else {
+    console.log('⚠️ Nenhum clickid detectado na sessão');
+  }
+})();
+
 </script>
 </body>
 </html>
