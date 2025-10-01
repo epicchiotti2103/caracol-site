@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function() {
   <span class="plus"></span>
 </button>
 
-<button class="trail-title center ver-trilha" data-target="trilha-atendimento" aria-expanded="false">
+<button class="trail-title center ver-trilha" data-target="trilha-atendimento" aria-expanded="false" style="left: 50% !important; transform: translateX(-50%) !important; position: absolute !important;">
   <i class="fa-solid fa-headset"></i>
   <span class="label">Atendimento / Mídia</span>
   <span class="plus"></span>
@@ -594,6 +594,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <script>
     (function(){
+      // Força posicionamento correto do botão central
+      function fixCenterButton() {
+        const centerBtn = document.querySelector('.trail-title.center');
+        if (centerBtn) {
+          // Remove todos os estilos que podem estar interferindo
+          centerBtn.style.left = '50%';
+          centerBtn.style.transform = 'translateX(-50%)';
+          centerBtn.style.position = 'absolute';
+          centerBtn.style.margin = '0';
+          centerBtn.style.marginLeft = '0';
+          centerBtn.style.marginRight = '0';
+          centerBtn.style.right = 'auto';
+          
+          // Debug: mostra a posição atual
+          const rect = centerBtn.getBoundingClientRect();
+          console.log('🔧 Botão central posicionado:', {
+            left: centerBtn.style.left,
+            transform: centerBtn.style.transform,
+            position: centerBtn.style.position,
+            boundingRect: { left: rect.left, width: rect.width }
+          });
+        }
+      }
+      
+      // Aplica imediatamente e também depois do carregamento
+      fixCenterButton();
+      window.addEventListener('load', fixCenterButton);
+      document.addEventListener('DOMContentLoaded', fixCenterButton);
+      
       const triggers = document.querySelectorAll('.trilhas-montanha .ver-trilha');
       const panels   = document.querySelectorAll('.trilhas-montanha .trilha-panel');
       const closes   = document.querySelectorAll('.trilhas-montanha .panel-close');
