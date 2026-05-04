@@ -221,14 +221,14 @@
     // UI primitives
     // =====================================================================
     const inputBase =
-      'w-full bg-stone-900/60 border border-stone-800 rounded-md px-3 py-2 text-stone-100 placeholder:text-stone-600 focus:outline-none focus:border-lime-400/60 focus:bg-stone-900 transition-colors';
+      'w-full bg-stone-900/60 border border-stone-800 rounded-md px-3 py-2 text-stone-100 placeholder:text-stone-600 focus:outline-none focus:border-orainge-400/60 focus:bg-stone-900 transition-colors';
     const inputMono = `${inputBase} font-mono text-sm`;
 
     const Field = ({ label, hint, children, required }) => (
       <label className="block">
         <div className="flex items-baseline justify-between gap-2 mb-1.5">
           <span className="text-[11px] uppercase tracking-[0.14em] text-stone-400 font-medium">
-            {label} {required && <span className="text-lime-400">*</span>}
+            {label} {required && <span className="text-orainge-400">*</span>}
           </span>
           {hint && <span className="text-[10px] text-stone-500 italic">{hint}</span>}
         </div>
@@ -248,7 +248,7 @@
 
     const Toggle = ({ checked, onChange, label }) => (
       <button type="button" onClick={() => onChange(!checked)} className="flex items-center gap-2.5 group">
-        <div className={`relative w-9 h-5 rounded-full transition-colors ${checked ? 'bg-lime-400' : 'bg-stone-700'}`}>
+        <div className={`relative w-9 h-5 rounded-full transition-colors ${checked ? 'bg-orainge-400' : 'bg-stone-700'}`}>
           <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-stone-950 transition-transform ${checked ? 'translate-x-4' : 'translate-x-0.5'}`} />
         </div>
         <span className="text-sm text-stone-300 group-hover:text-stone-100">{label}</span>
@@ -262,7 +262,7 @@
             key={opt.value} type="button" onClick={() => onChange(opt.value)}
             className={`px-3 py-1.5 text-sm rounded-sm transition-colors ${
               value === opt.value
-                ? 'bg-lime-400 text-stone-950 font-semibold'
+                ? 'bg-orainge-400 text-stone-950 font-semibold'
                 : 'text-stone-400 hover:text-stone-100'
             }`}
           >
@@ -288,7 +288,7 @@
     const ItemCard = ({ index, label, onRemove, canRemove, children }) => (
       <div className="bg-stone-950/60 border border-stone-800/80 rounded-md p-4 relative">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-[10px] uppercase tracking-[0.16em] text-lime-400/80 font-mono font-semibold">
+          <span className="text-[10px] uppercase tracking-[0.16em] text-orainge-400/80 font-mono font-semibold">
             {label} #{index + 1}
           </span>
           {canRemove && (
@@ -304,7 +304,7 @@
 
     const AddButton = ({ onClick, label }) => (
       <button type="button" onClick={onClick}
-        className="w-full border border-dashed border-stone-700 hover:border-lime-400/60 text-stone-500 hover:text-lime-400 rounded-md py-2.5 text-sm transition-colors flex items-center justify-center gap-1.5">
+        className="w-full border border-dashed border-stone-700 hover:border-orainge-400/60 text-stone-500 hover:text-orainge-400 rounded-md py-2.5 text-sm transition-colors flex items-center justify-center gap-1.5">
         <Plus size={14} />
         {label}
       </button>
@@ -399,7 +399,7 @@
       const hasCpiSource = p.media_sources.some((s) => s.campaign_type === 'cpi');
 
       return (
-        <div className="min-h-screen bg-stone-950 text-stone-100 selection:bg-lime-400/30">
+        <div className="min-h-screen bg-stone-950 text-stone-100 selection:bg-orainge-400/30">
           <div className="grain-bg fixed inset-0 pointer-events-none opacity-[0.025] mix-blend-overlay" />
 
           <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 py-8 lg:py-12">
@@ -407,21 +407,21 @@
             <header className="mb-8 flex flex-wrap items-end justify-between gap-4 pb-6 border-b border-stone-800">
               <div>
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-1.5 h-6 bg-lime-400 rounded-sm" />
-                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-lime-400/90">
+                  <div className="w-1.5 h-6 bg-orainge-400 rounded-sm" />
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-orainge-400/90">
                     apps.yaml · product builder
                   </span>
                 </div>
                 <h1 className="font-display text-3xl lg:text-4xl font-bold tracking-tight text-stone-100">
-                  Novo produto pra <span className="italic text-lime-400">apps.yaml</span>
+                  Novo produto pra <span className="italic text-orainge-400">apps.yaml</span>
                 </h1>
                 <p className="text-sm text-stone-400 mt-2 max-w-2xl">
                   Preencha os campos abaixo. O YAML é gerado em tempo real à direita — pronto pra colar
-                  debaixo de <code className="font-mono text-lime-400/80">products:</code>.
+                  debaixo de <code className="font-mono text-orainge-400/80">products:</code>.
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                <span className={`flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider transition-opacity ${savedFlash ? 'text-lime-400 opacity-100' : 'text-stone-500 opacity-60'}`}>
+                <span className={`flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider transition-opacity ${savedFlash ? 'text-orainge-400 opacity-100' : 'text-stone-500 opacity-60'}`}>
                   <Save size={12} />
                   {savedFlash ? 'salvo' : 'auto-save'}
                 </span>
@@ -653,7 +653,7 @@
                   </Field>
                   <p className="text-xs text-stone-500 italic pt-1">
                     <code className="font-mono">pause_rules</code> usa{' '}
-                    <code className="font-mono text-lime-400/70">*default_pause_rules</code>{' '}
+                    <code className="font-mono text-orainge-400/70">*default_pause_rules</code>{' '}
                     automaticamente. Pra customizar, edite no YAML depois.
                   </p>
                 </Section>
@@ -667,7 +667,7 @@
                       <div className="flex gap-1.5">
                         <div className="w-2.5 h-2.5 rounded-full bg-rose-400/40" />
                         <div className="w-2.5 h-2.5 rounded-full bg-amber-300/40" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-lime-400/60" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-orainge-400/60" />
                       </div>
                       <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-stone-400 ml-2">
                         apps.yaml
@@ -675,7 +675,7 @@
                     </div>
                     <button onClick={copyYaml}
                       className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-md transition-all ${
-                        copied ? 'bg-lime-400 text-stone-950 font-semibold'
+                        copied ? 'bg-orainge-400 text-stone-950 font-semibold'
                                : 'bg-stone-800 hover:bg-stone-700 text-stone-200'
                       }`}>
                       {copied ? (<><Check size={13} />Copiado!</>) : (<><Copy size={13} />Copiar YAML</>)}
